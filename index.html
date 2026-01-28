@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Hour This Week — Claude Code</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           DESIGN SYSTEM
+           ============================================ */
+        :root {
+            /* Colors */
+            --bg: #FAFAF8;
+            --bg-slide: #FAFAF8;
+            --text: #1B1B1B;
+            --accent: #D4725C;
+            --accent-light: #F2DDD7;
+            --accent-dark: #B85A45;
+            --subtle: #8A8A85;
+            --border: #E8E8E4;
+            --white: #FFFFFF;
+
+            /* Typography */
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --size-hero: 4.5rem;
+            --size-title: 3rem;
+            --size-large: 2rem;
+            --size-body: 1.25rem;
+            --size-small: 1rem;
+            --size-tiny: 0.85rem;
+            --weight-light: 300;
+            --weight-normal: 400;
+            --weight-medium: 500;
+            --weight-semibold: 600;
+            --weight-bold: 700;
+            --weight-black: 800;
+            --line-height: 1.5;
+            --line-height-tight: 1.15;
+
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 3rem;
+            --space-xl: 4rem;
+            --space-2xl: 6rem;
+
+            /* Transitions */
+            --transition-slide: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.4s ease;
+
+            /* Misc */
+            --radius: 12px;
+            --radius-sm: 8px;
+            --shadow: 0 4px 24px rgba(27, 27, 27, 0.08);
+            --shadow-lg: 0 8px 40px rgba(27, 27, 27, 0.12);
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: var(--font);
+            color: var(--text);
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ============================================
+           PRESENTATION CONTAINER
+           ============================================ */
+        .presentation {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ============================================
+           SLIDE BASE
+           ============================================ */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-xl) var(--space-2xl);
+            background: var(--bg-slide);
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity var(--transition-slide),
+                        transform var(--transition-slide);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+            z-index: 10;
+        }
+
+        .slide.prev {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .slide-content {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        /* ============================================
+           FRAGMENTS
+           ============================================ */
+        [data-fragment] {
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity var(--transition-medium),
+                        transform var(--transition-medium);
+        }
+
+        [data-fragment].visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================
+           BLACKOUT OVERLAY
+           ============================================ */
+        .blackout {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .blackout.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ============================================
+           PROGRESS BAR
+           ============================================ */
+        .progress {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent);
+            z-index: 100;
+            transition: width var(--transition-slide);
+            border-radius: 0 2px 2px 0;
+        }
+
+        /* ============================================
+           TYPOGRAPHY UTILITIES
+           ============================================ */
+        .text-hero { font-size: var(--size-hero); font-weight: var(--weight-bold); line-height: var(--line-height-tight); }
+        .text-title { font-size: var(--size-title); font-weight: var(--weight-semibold); line-height: var(--line-height-tight); }
+        .text-large { font-size: var(--size-large); font-weight: var(--weight-normal); line-height: var(--line-height); }
+        .text-body { font-size: var(--size-body); font-weight: var(--weight-normal); line-height: var(--line-height); }
+        .text-small { font-size: var(--size-small); font-weight: var(--weight-normal); line-height: var(--line-height); }
+        .text-subtle { color: var(--subtle); }
+        .text-accent { color: var(--accent); }
+        .text-center { text-align: center; }
+        .text-bold { font-weight: var(--weight-bold); }
+
+        /* ============================================
+           SLIDE 1: EMERSON
+           ============================================ */
+        .slide-emerson {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xl);
+        }
+
+        .photo-frame {
+            flex-shrink: 0;
+        }
+
+        .photo-placeholder {
+            width: 320px;
+            height: 320px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--border) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            color: var(--subtle);
+            font-size: var(--size-small);
+            font-weight: var(--weight-medium);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .emerson-text {
+            max-width: 400px;
+        }
+
+        .emerson-text h1 {
+            margin-bottom: var(--space-sm);
+            letter-spacing: -0.02em;
+        }
+
+        .emerson-text p {
+            color: var(--subtle);
+        }
+
+        /* ============================================
+           SLIDE 2: THE SUITCASE
+           ============================================ */
+        .slide-suitcase {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-lg);
+        }
+
+        .book-shelf {
+            display: flex;
+            gap: 14px;
+            align-items: flex-end;
+            padding: var(--space-md) var(--space-md) var(--space-sm);
+            border-bottom: 3px solid var(--border);
+        }
+
+        .book-spine {
+            width: 72px;
+            border-radius: 4px 8px 8px 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15),
+                        inset -2px 0 4px rgba(0, 0, 0, 0.1);
+            color: rgba(255, 255, 255, 0.92);
+            position: relative;
+            transition: transform var(--transition-fast);
+        }
+
+        .book-spine:nth-child(1) { height: 210px; background: #A0522D; }
+        .book-spine:nth-child(2) { height: 190px; background: #2E6B4F; }
+        .book-spine:nth-child(3) { height: 224px; background: #6B3A2E; }
+        .book-spine:nth-child(4) { height: 195px; background: #8B2252; }
+        .book-spine:nth-child(5) { height: 205px; background: #3B6B8B; }
+
+        .book-emoji {
+            font-size: 1.8rem;
+        }
+
+        .book-title {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            font-size: 0.7rem;
+            font-weight: var(--weight-semibold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.85;
+        }
+
+        .suitcase-quote {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .suitcase-quote p {
+            font-size: var(--size-large);
+            font-weight: var(--weight-light);
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .suitcase-quote em {
+            font-style: normal;
+            color: var(--accent);
+            font-weight: var(--weight-semibold);
+        }
+
+        /* ============================================
+           SLIDE 3: THE ASK
+           ============================================ */
+        .slide-ask {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .ask-text {
+            font-size: clamp(2rem, 4.5vw, 3.5rem);
+            font-weight: var(--weight-semibold);
+            line-height: 1.4;
+            max-width: 800px;
+            letter-spacing: -0.02em;
+        }
+
+        .ask-text .highlight {
+            color: var(--accent);
+            font-weight: var(--weight-bold);
+        }
+
+        /* ============================================
+           SLIDE 4: THE SHIFT
+           ============================================ */
+        .slide-shift {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-lg);
+        }
+
+        .shift-title {
+            margin-bottom: var(--space-sm);
+        }
+
+        .shift-visual {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .shift-box {
+            text-align: center;
+            padding: var(--space-lg) var(--space-xl);
+            border-radius: var(--radius);
+            min-width: 260px;
+        }
+
+        .shift-before {
+            background: var(--border);
+        }
+
+        .shift-after {
+            background: var(--accent-light);
+            border: 2px solid var(--accent);
+        }
+
+        .shift-label {
+            display: block;
+            font-size: var(--size-large);
+            font-weight: var(--weight-semibold);
+            margin-bottom: var(--space-xs);
+        }
+
+        .shift-before .shift-label {
+            color: var(--subtle);
+        }
+
+        .shift-after .shift-label {
+            color: var(--accent-dark);
+        }
+
+        .shift-desc {
+            font-size: var(--size-small);
+            color: var(--subtle);
+        }
+
+        .shift-arrow {
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           SLIDE 5: OBJECTIONS
+           ============================================ */
+        .slide-objections {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .objections-title {
+            margin-bottom: var(--space-lg);
+        }
+
+        .objection-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .objection {
+            font-size: var(--size-large);
+            font-weight: var(--weight-light);
+            font-style: italic;
+            color: var(--text);
+            padding-left: var(--space-md);
+            border-left: 3px solid var(--border);
+            line-height: 1.6;
+            transition: border-color var(--transition-medium);
+        }
+
+        .objection.visible {
+            border-left-color: var(--accent);
+        }
+
+        .objection em {
+            font-style: normal;
+            color: var(--accent);
+            font-weight: var(--weight-semibold);
+        }
+
+        /* ============================================
+           SLIDE 6: EVIDENCE
+           ============================================ */
+        .slide-evidence {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .evidence-title {
+            margin-bottom: var(--space-lg);
+        }
+
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .evidence-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: var(--space-md);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+            box-shadow: var(--shadow);
+            transition: box-shadow var(--transition-medium),
+                        transform var(--transition-medium);
+        }
+
+        .evidence-card.visible {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .evidence-name {
+            font-size: var(--size-body);
+            font-weight: var(--weight-bold);
+            color: var(--accent);
+        }
+
+        .evidence-built {
+            font-size: var(--size-body);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           SLIDE 7: CTA
+           ============================================ */
+        .slide-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-lg);
+        }
+
+        .cta-headline {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: var(--weight-black);
+            color: var(--accent);
+            letter-spacing: -0.03em;
+            line-height: var(--line-height-tight);
+            text-align: center;
+        }
+
+        .cta-details {
+            text-align: center;
+        }
+
+        .cta-url {
+            font-size: var(--size-large);
+            font-weight: var(--weight-semibold);
+            color: var(--text);
+            margin-top: var(--space-xs);
+            letter-spacing: -0.01em;
+        }
+
+        .qr-placeholder {
+            width: 140px;
+            height: 140px;
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--subtle);
+            font-size: var(--size-small);
+            font-weight: var(--weight-medium);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* ============================================
+           SLIDE NUMBER (subtle)
+           ============================================ */
+        .slide-number {
+            position: fixed;
+            bottom: 16px;
+            right: 24px;
+            font-size: var(--size-tiny);
+            color: var(--border);
+            z-index: 50;
+            font-variant-numeric: tabular-nums;
+            pointer-events: none;
+            transition: color var(--transition-fast);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .slide {
+                padding: var(--space-md);
+            }
+
+            .slide-emerson {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .photo-placeholder {
+                width: 200px;
+                height: 200px;
+            }
+
+            .shift-visual {
+                flex-direction: column;
+            }
+
+            .shift-box {
+                min-width: 200px;
+                padding: var(--space-md);
+            }
+
+            .shift-arrow {
+                transform: rotate(90deg);
+            }
+
+            .evidence-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .book-spine {
+                width: 55px;
+            }
+
+            .book-spine:nth-child(1) { height: 160px; }
+            .book-spine:nth-child(2) { height: 145px; }
+            .book-spine:nth-child(3) { height: 170px; }
+            .book-spine:nth-child(4) { height: 150px; }
+            .book-spine:nth-child(5) { height: 158px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+
+        <!-- =============================================
+             SLIDE 1: EMERSON
+             ============================================= -->
+        <div class="slide active" id="slide-1">
+            <div class="slide-content slide-emerson">
+                <div class="photo-frame">
+                    <div class="photo-placeholder">
+                        <span>photo</span>
+                    </div>
+                </div>
+                <div class="emerson-text">
+                    <h1 class="text-hero">Emerson</h1>
+                    <p class="text-large text-subtle">She's five. She made a video game.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================
+             SLIDE 2: THE SUITCASE
+             ============================================= -->
+        <div class="slide" id="slide-2">
+            <div class="slide-content slide-suitcase">
+                <div class="book-shelf">
+                    <div class="book-spine">
+                        <span class="book-emoji">&#x1F42B;</span>
+                        <span class="book-title">Perl</span>
+                    </div>
+                    <div class="book-spine">
+                        <span class="book-emoji">&#x1F40D;</span>
+                        <span class="book-title">Python</span>
+                    </div>
+                    <div class="book-spine">
+                        <span class="book-emoji">&#x2615;</span>
+                        <span class="book-title">Java</span>
+                    </div>
+                    <div class="book-spine">
+                        <span class="book-emoji">&#x1F48E;</span>
+                        <span class="book-title">Ruby</span>
+                    </div>
+                    <div class="book-spine">
+                        <span class="book-emoji">&#x1F43F;&#xFE0F;</span>
+                        <span class="book-title">Go</span>
+                    </div>
+                </div>
+                <blockquote class="suitcase-quote">
+                    <p>&ldquo;This is not for me.<br>This is for <em>suitcase people</em>.&rdquo;</p>
+                </blockquote>
+            </div>
+        </div>
+
+        <!-- =============================================
+             SLIDE 3: THE ASK
+             ============================================= -->
+        <div class="slide" id="slide-3">
+            <div class="slide-content slide-ask">
+                <p class="ask-text">
+                    Spend <span class="highlight">one hour</span> this week<br>
+                    building something real<br>
+                    with <span class="highlight">Claude Code</span>.
+                </p>
+            </div>
+        </div>
+
+        <!-- =============================================
+             SLIDE 4: THE SHIFT
+             ============================================= -->
+        <div class="slide" id="slide-4">
+            <div class="slide-content slide-shift">
+                <h2 class="text-title text-center shift-title">The tools changed.</h2>
+                <div class="shift-visual">
+                    <div class="shift-box shift-before">
+                        <span class="shift-label">Autocomplete</span>
+                        <p class="shift-desc">Suggesting the next word</p>
+                    </div>
+                    <div class="shift-arrow">
+                        <svg width="60" height="24" viewBox="0 0 60 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 12H54M54 12L44 4M54 12L44 20" stroke="#D4725C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="shift-box shift-after">
+                        <span class="shift-label">Junior Developer</span>
+                        <p class="shift-desc">Autonomous. Capable. Iterating.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================
+             SLIDE 5: OBJECTIONS
+             ============================================= -->
+        <div class="slide" id="slide-5">
+            <div class="slide-content slide-objections">
+                <h2 class="text-title text-center objections-title">But&hellip;</h2>
+                <div class="objection-list">
+                    <p class="objection" data-fragment="1">
+                        &ldquo;But I'm going to be a <em>manager</em>&hellip;&rdquo;
+                    </p>
+                    <p class="objection" data-fragment="2">
+                        &ldquo;But I don't have <em>time</em>&hellip;&rdquo;
+                    </p>
+                    <p class="objection" data-fragment="3">
+                        &ldquo;But I don't have an <em>idea</em>&hellip;&rdquo;
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================
+             SLIDE 6: EVIDENCE
+             ============================================= -->
+        <div class="slide" id="slide-6">
+            <div class="slide-content slide-evidence">
+                <h2 class="text-title text-center evidence-title">What people built</h2>
+                <div class="evidence-grid">
+                    <div class="evidence-card" data-fragment="1">
+                        <span class="evidence-name">Alex</span>
+                        <span class="evidence-built">Portfolio tracker that pulls live data</span>
+                    </div>
+                    <div class="evidence-card" data-fragment="2">
+                        <span class="evidence-name">Morgan</span>
+                        <span class="evidence-built">Automated their case prep workflow</span>
+                    </div>
+                    <div class="evidence-card" data-fragment="3">
+                        <span class="evidence-name">Jordan</span>
+                        <span class="evidence-built">Birthday gift app for their partner</span>
+                    </div>
+                    <div class="evidence-card" data-fragment="4">
+                        <span class="evidence-name">Riley</span>
+                        <span class="evidence-built">Prototyped their startup idea</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================
+             SLIDE 7: CTA
+             ============================================= -->
+        <div class="slide" id="slide-7">
+            <div class="slide-content slide-cta">
+                <h1 class="cta-headline">One hour. This week.</h1>
+                <div class="cta-details">
+                    <p class="text-body text-subtle">Download Claude Code</p>
+                    <p class="cta-url">claude.ai/download</p>
+                </div>
+                <div class="qr-placeholder">
+                    <span>QR</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overlays -->
+        <div class="blackout" id="blackout"></div>
+        <div class="progress" id="progress"></div>
+        <div class="slide-number" id="slide-number"></div>
+
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ── State ──────────────────────────────────────
+        const slides = document.querySelectorAll('.slide');
+        const blackout = document.getElementById('blackout');
+        const progress = document.getElementById('progress');
+        const slideNumber = document.getElementById('slide-number');
+        const totalSlides = slides.length;
+        let currentSlide = 0;
+        let isBlackout = false;
+
+        // ── Fragments ──────────────────────────────────
+        function getFragments(slideEl) {
+            return Array.from(slideEl.querySelectorAll('[data-fragment]'))
+                .sort(function(a, b) {
+                    return parseInt(a.dataset.fragment) - parseInt(b.dataset.fragment);
+                });
+        }
+
+        function getVisibleFragmentCount(slideEl) {
+            return slideEl.querySelectorAll('[data-fragment].visible').length;
+        }
+
+        function revealNextFragment(slideEl) {
+            var fragments = getFragments(slideEl);
+            var visibleCount = getVisibleFragmentCount(slideEl);
+            if (visibleCount < fragments.length) {
+                fragments[visibleCount].classList.add('visible');
+                return true;
+            }
+            return false;
+        }
+
+        function hideLastFragment(slideEl) {
+            var fragments = getFragments(slideEl);
+            var visibleCount = getVisibleFragmentCount(slideEl);
+            if (visibleCount > 0) {
+                fragments[visibleCount - 1].classList.remove('visible');
+                return true;
+            }
+            return false;
+        }
+
+        function resetFragments(slideEl) {
+            var frags = slideEl.querySelectorAll('[data-fragment]');
+            for (var i = 0; i < frags.length; i++) {
+                frags[i].classList.remove('visible');
+            }
+        }
+
+        function showAllFragments(slideEl) {
+            var frags = slideEl.querySelectorAll('[data-fragment]');
+            for (var i = 0; i < frags.length; i++) {
+                frags[i].classList.add('visible');
+            }
+        }
+
+        // ── Navigation ────────────────────────────────
+        function goToSlide(index) {
+            if (index < 0 || index >= totalSlides || index === currentSlide) return;
+
+            var forward = index > currentSlide;
+
+            // Remove active/prev from all slides
+            for (var i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active', 'prev');
+            }
+
+            // Mark the old slide
+            if (forward) {
+                slides[currentSlide].classList.add('prev');
+            }
+            // If going backward, reset fragments on the slide we're leaving
+            if (!forward) {
+                resetFragments(slides[currentSlide]);
+            }
+
+            currentSlide = index;
+
+            // When going backward TO a slide, show all its fragments
+            if (!forward) {
+                showAllFragments(slides[currentSlide]);
+            }
+
+            slides[currentSlide].classList.add('active');
+            updateProgress();
+        }
+
+        function next() {
+            if (isBlackout) { toggleBlackout(); return; }
+            if (!revealNextFragment(slides[currentSlide])) {
+                goToSlide(currentSlide + 1);
+            }
+        }
+
+        function prev() {
+            if (isBlackout) { toggleBlackout(); return; }
+            if (!hideLastFragment(slides[currentSlide])) {
+                goToSlide(currentSlide - 1);
+            }
+        }
+
+        function updateProgress() {
+            var pct = totalSlides > 1 ? (currentSlide / (totalSlides - 1)) * 100 : 100;
+            progress.style.width = pct + '%';
+            slideNumber.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+        }
+
+        // ── Blackout & Fullscreen ──────────────────────
+        function toggleBlackout() {
+            isBlackout = !isBlackout;
+            blackout.classList.toggle('active', isBlackout);
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(function() {});
+            } else {
+                document.exitFullscreen().catch(function() {});
+            }
+        }
+
+        // ── Keyboard ──────────────────────────────────
+        document.addEventListener('keydown', function(e) {
+            switch (e.key) {
+                case 'ArrowRight':
+                case ' ':
+                case 'Enter':
+                case 'PageDown':
+                    e.preventDefault();
+                    next();
+                    break;
+                case 'ArrowLeft':
+                case 'Backspace':
+                case 'PageUp':
+                    e.preventDefault();
+                    prev();
+                    break;
+                case 'b':
+                case 'B':
+                case '.':
+                    toggleBlackout();
+                    break;
+                case 'f':
+                case 'F':
+                    toggleFullscreen();
+                    break;
+                case 'Escape':
+                    if (isBlackout) toggleBlackout();
+                    break;
+            }
+        });
+
+        // ── Touch / Swipe ──────────────────────────────
+        var touchStartX = 0;
+        var touchStartY = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', function(e) {
+            var dx = e.changedTouches[0].screenX - touchStartX;
+            var dy = e.changedTouches[0].screenY - touchStartY;
+            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+                if (dx < 0) next();
+                else prev();
+            }
+        }, { passive: true });
+
+        // ── Init ───────────────────────────────────────
+        updateProgress();
+
+    })();
+    </script>
+</body>
+</html>
