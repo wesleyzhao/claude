@@ -447,6 +447,22 @@
         }
 
         /* ============================================
+           SLIDE 2: PUNCHLINE
+           ============================================ */
+        .slide-punchline {
+            text-align: center;
+            max-width: var(--content-max-width-narrow);
+        }
+
+        .punchline-text {
+            font-size: var(--size-title);
+            font-weight: var(--weight-semibold);
+            line-height: var(--line-height-tight);
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        /* ============================================
            SHARED: "So easy" slide title
            ============================================ */
         .so-easy-title {
@@ -1035,19 +1051,10 @@
             white-space: nowrap;
         }
 
-        .qr-placeholder {
+        .qr-code {
             width: var(--qr-size);
             height: var(--qr-size);
-            border: 2px dashed var(--border);
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--subtle);
-            font-size: var(--size-small);
-            font-weight: var(--weight-medium);
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            border-radius: var(--radius-sm);
         }
 
         .cta-footer {
@@ -1134,7 +1141,16 @@
         </div>
 
         <!-- =============================================
-             SLIDE 2: EMERSON
+             SLIDE 2: PUNCHLINE
+             ============================================= -->
+        <div class="slide" id="slide-2">
+            <div class="slide-content slide-punchline">
+                <p class="punchline-text">Who needs a God, when you can download Claude.</p>
+            </div>
+        </div>
+
+        <!-- =============================================
+             SLIDE 3: EMERSON
              ============================================= -->
         <div class="slide slide--rect slide--centered-photo" id="slide-2">
             <div class="slide-content slide-emerson">
@@ -1313,9 +1329,7 @@
             <div class="slide-content slide-cta">
                 <h1 class="cta-headline">Make something<br>with Claude Code.</h1>
                 <p class="cta-subline">One hour. This week.</p>
-                <div class="qr-placeholder">
-                    <span>QR</span>
-                </div>
+                <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://calendly.com/weszhao-stanford/30min" alt="Book a time with Wesley">
                 <p class="cta-footer">I'm happy to help.</p>
             </div>
         </div>
