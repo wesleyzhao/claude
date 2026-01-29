@@ -443,109 +443,138 @@
            ============================================ */
         .slide-why {
             text-align: center;
-            max-width: 700px;
+            max-width: 750px;
         }
 
         .why-title {
             font-size: var(--size-title);
             font-weight: var(--weight-semibold);
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-xl);
             letter-spacing: -0.01em;
         }
 
-        .why-comparison {
+        .why-main {
+            font-size: var(--size-large);
+            font-weight: var(--weight-semibold);
+            color: var(--text);
+            margin-bottom: var(--space-md);
+            line-height: var(--line-height);
+        }
+
+        .why-main em {
+            color: var(--accent);
+            font-style: normal;
+        }
+
+        .why-sub {
+            font-size: var(--size-body);
+            color: var(--subtle);
+            line-height: var(--line-height);
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .why-features {
             display: flex;
-            align-items: center;
             justify-content: center;
             gap: var(--space-lg);
-            margin-bottom: var(--space-lg);
+            margin-top: var(--space-xl);
         }
 
-        .why-box {
-            padding: var(--space-md) var(--space-lg);
-            border-radius: var(--radius);
+        .why-feature {
             text-align: center;
-            min-width: 200px;
+            padding: var(--space-md);
         }
 
-        .why-box--other {
-            background: var(--border);
+        .why-feature-icon {
+            font-size: 2rem;
+            margin-bottom: var(--space-sm);
         }
 
-        .why-box--claude {
-            background: var(--accent-light);
-            border: 2px solid var(--accent);
-        }
-
-        .why-box-label {
+        .why-feature-text {
             font-size: var(--size-body);
-            font-weight: var(--weight-semibold);
-            margin-bottom: 4px;
-        }
-
-        .why-box--other .why-box-label {
-            color: var(--subtle);
-        }
-
-        .why-box--claude .why-box-label {
-            color: var(--accent-dark);
-        }
-
-        .why-box-desc {
-            font-size: var(--size-small);
-            color: var(--subtle);
-        }
-
-        .why-metaphor {
-            font-size: var(--size-large);
             color: var(--text);
-            font-style: italic;
-            font-weight: var(--weight-light);
-        }
-
-        .why-metaphor em {
-            font-style: normal;
-            font-weight: var(--weight-semibold);
-            color: var(--accent);
+            font-weight: var(--weight-medium);
         }
 
         /* ============================================
            SLIDE 6: HOW TO START (Terminal)
            ============================================ */
         .slide-howto {
-            text-align: center;
-            max-width: 800px;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            gap: var(--space-xl);
+            max-width: 1100px;
             width: 100%;
         }
 
-        .howto-title {
-            font-size: var(--size-title);
-            color: var(--text);
+        .howto-steps {
+            flex: 0 0 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: var(--space-lg);
+        }
+
+        .howto-step {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+        }
+
+        .howto-number {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--border);
+            color: var(--subtle);
+            font-size: var(--size-body);
+            font-weight: var(--weight-bold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition-medium), color var(--transition-medium);
+        }
+
+        .howto-step.visible .howto-number {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .howto-label {
+            font-size: var(--size-large);
             font-weight: var(--weight-semibold);
-            letter-spacing: -0.01em;
-            margin-bottom: var(--space-lg);
+            color: var(--subtle);
+            padding-top: 4px;
+            transition: color var(--transition-medium);
+        }
+
+        .howto-step.visible .howto-label {
+            color: var(--text);
         }
 
         .terminal {
+            flex: 1;
             background: #1a1a2e;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             text-align: left;
-            width: 100%;
         }
 
         .terminal-header {
             background: #2d2d3a;
-            padding: 12px 16px;
+            padding: 14px 18px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
         .terminal-btn {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
         }
 
@@ -557,21 +586,21 @@
             flex: 1;
             text-align: center;
             color: #888;
-            font-size: 13px;
+            font-size: 14px;
             font-family: 'SF Mono', Monaco, monospace;
-            margin-right: 52px;
+            margin-right: 58px;
         }
 
         .terminal-body {
-            padding: 24px;
+            padding: 28px 32px;
             font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
-            font-size: 15px;
-            line-height: 1.7;
-            min-height: 280px;
+            font-size: clamp(16px, 1.8vw, 20px);
+            line-height: 1.8;
+            min-height: 300px;
         }
 
         .terminal-line {
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .terminal-prompt {
@@ -584,7 +613,6 @@
 
         .terminal-output {
             color: #8b949e;
-            margin-left: 0;
         }
 
         .terminal-claude {
@@ -599,31 +627,8 @@
             color: #7ee787;
         }
 
-        .terminal-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 18px;
-            background: #f0f0f0;
-            margin-left: 2px;
-            animation: blink 1s step-end infinite;
-            vertical-align: text-bottom;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        .terminal-step {
-            margin-bottom: 20px;
-        }
-
-        .terminal-step-label {
-            color: #6e7681;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 8px;
+        .terminal-block {
+            margin-bottom: 24px;
         }
 
         /* ============================================
@@ -843,17 +848,22 @@
         <div class="slide" id="slide-5">
             <div class="slide-content slide-why">
                 <h2 class="why-title">Why Claude Code?</h2>
-                <div class="why-comparison">
-                    <div class="why-box why-box--other">
-                        <p class="why-box-label">Lovable, Replit, etc.</p>
-                        <p class="why-box-desc">Nice apartment</p>
+                <p class="why-main"><em>Full access</em> to your computer.</p>
+                <p class="why-sub">No sandbox. No limitations. It can read your files, run commands, browse the web, and build anything you describe.</p>
+                <div class="why-features">
+                    <div class="why-feature">
+                        <div class="why-feature-icon">📁</div>
+                        <div class="why-feature-text">Your files</div>
                     </div>
-                    <div class="why-box why-box--claude">
-                        <p class="why-box-label">Claude Code</p>
-                        <p class="why-box-desc">Plot of land</p>
+                    <div class="why-feature">
+                        <div class="why-feature-icon">⚡</div>
+                        <div class="why-feature-text">Your terminal</div>
+                    </div>
+                    <div class="why-feature">
+                        <div class="why-feature-icon">🌐</div>
+                        <div class="why-feature-text">The web</div>
                     </div>
                 </div>
-                <p class="why-metaphor"><em>Raw access</em> to your computer.<br>Anything you can do, it can do.</p>
             </div>
         </div>
 
@@ -862,7 +872,20 @@
              ============================================= -->
         <div class="slide" id="slide-6">
             <div class="slide-content slide-howto">
-                <h2 class="howto-title">How to start</h2>
+                <div class="howto-steps">
+                    <div class="howto-step" data-fragment="1">
+                        <span class="howto-number">1</span>
+                        <span class="howto-label">Download</span>
+                    </div>
+                    <div class="howto-step" data-fragment="2">
+                        <span class="howto-number">2</span>
+                        <span class="howto-label">Ask for help</span>
+                    </div>
+                    <div class="howto-step" data-fragment="3">
+                        <span class="howto-number">3</span>
+                        <span class="howto-label">Press enter</span>
+                    </div>
+                </div>
                 <div class="terminal">
                     <div class="terminal-header">
                         <div class="terminal-btn terminal-btn--red"></div>
@@ -871,14 +894,12 @@
                         <div class="terminal-title">Terminal</div>
                     </div>
                     <div class="terminal-body">
-                        <div class="terminal-step" data-fragment="1">
-                            <div class="terminal-step-label">Step 1: Download</div>
+                        <div class="terminal-block" data-fragment="1">
                             <div class="terminal-line">
                                 <span class="terminal-prompt">$ </span><span class="terminal-command">curl -fsSL https://claude.ai/install.sh | bash</span>
                             </div>
                         </div>
-                        <div class="terminal-step" data-fragment="2">
-                            <div class="terminal-step-label">Step 2: Tell it what you want</div>
+                        <div class="terminal-block" data-fragment="2">
                             <div class="terminal-line">
                                 <span class="terminal-prompt">$ </span><span class="terminal-command">claude</span>
                             </div>
@@ -886,8 +907,7 @@
                                 <span class="terminal-claude">&gt; </span><span class="terminal-typing">Make me a presentation convincing people to use claude code</span>
                             </div>
                         </div>
-                        <div class="terminal-step" data-fragment="3">
-                            <div class="terminal-step-label">Step 3: Press enter</div>
+                        <div class="terminal-block" data-fragment="3">
                             <div class="terminal-line">
                                 <span class="terminal-output">Thinking...</span>
                             </div>
