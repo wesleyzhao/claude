@@ -525,23 +525,22 @@
         }
 
         .howto-steps {
-            flex: 0 0 180px;
+            flex: 0 0 160px;
             display: flex;
             flex-direction: column;
-            gap: 0;
-            padding-top: 58px;
+            padding-top: 52px;
         }
 
         .howto-step {
             display: flex;
             align-items: center;
             gap: var(--space-sm);
-            height: 72px;
-            margin-bottom: 24px;
+            height: 96px;
         }
 
         .howto-step:last-child {
-            margin-bottom: 0;
+            height: auto;
+            min-height: 96px;
         }
 
         .howto-number {
@@ -620,7 +619,11 @@
         }
 
         .terminal-line {
-            margin-bottom: 12px;
+            margin-bottom: 8px;
+        }
+
+        .terminal-line:last-child {
+            margin-bottom: 0;
         }
 
         .terminal-prompt {
@@ -648,15 +651,10 @@
         }
 
         .terminal-block {
-            min-height: 72px;
-            margin-bottom: 24px;
+            min-height: 96px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-        }
-
-        .terminal-block:last-child {
-            margin-bottom: 0;
         }
 
         /* ============================================
@@ -998,32 +996,50 @@
         var isBlackout = false;
 
         // ── Fragments ──────────────────────────────────
-        function getFragments(slideEl) {
-            return Array.from(slideEl.querySelectorAll('[data-fragment]'))
-                .sort(function(a, b) {
-                    return parseInt(a.dataset.fragment) - parseInt(b.dataset.fragment);
-                });
+        function getFragmentSteps(slideEl) {
+            // Get unique fragment numbers in order
+            var frags = slideEl.querySelectorAll('[data-fragment]');
+            var steps = [];
+            for (var i = 0; i < frags.length; i++) {
+                var num = parseInt(frags[i].dataset.fragment);
+                if (steps.indexOf(num) === -1) steps.push(num);
+            }
+            return steps.sort(function(a, b) { return a - b; });
         }
 
-        function getVisibleFragmentCount(slideEl) {
-            return slideEl.querySelectorAll('[data-fragment].visible').length;
+        function getVisibleStepCount(slideEl) {
+            var steps = getFragmentSteps(slideEl);
+            var count = 0;
+            for (var i = 0; i < steps.length; i++) {
+                var els = slideEl.querySelectorAll('[data-fragment="' + steps[i] + '"]');
+                if (els.length > 0 && els[0].classList.contains('visible')) count++;
+            }
+            return count;
         }
 
         function revealNextFragment(slideEl) {
-            var fragments = getFragments(slideEl);
-            var visibleCount = getVisibleFragmentCount(slideEl);
-            if (visibleCount < fragments.length) {
-                fragments[visibleCount].classList.add('visible');
+            var steps = getFragmentSteps(slideEl);
+            var visibleCount = getVisibleStepCount(slideEl);
+            if (visibleCount < steps.length) {
+                var nextStep = steps[visibleCount];
+                var els = slideEl.querySelectorAll('[data-fragment="' + nextStep + '"]');
+                for (var i = 0; i < els.length; i++) {
+                    els[i].classList.add('visible');
+                }
                 return true;
             }
             return false;
         }
 
         function hideLastFragment(slideEl) {
-            var fragments = getFragments(slideEl);
-            var visibleCount = getVisibleFragmentCount(slideEl);
+            var steps = getFragmentSteps(slideEl);
+            var visibleCount = getVisibleStepCount(slideEl);
             if (visibleCount > 0) {
-                fragments[visibleCount - 1].classList.remove('visible');
+                var lastStep = steps[visibleCount - 1];
+                var els = slideEl.querySelectorAll('[data-fragment="' + lastStep + '"]');
+                for (var i = 0; i < els.length; i++) {
+                    els[i].classList.remove('visible');
+                }
                 return true;
             }
             return false;
