@@ -28,9 +28,15 @@ https://wesleyzhao.github.io/class-presentation/
 - **Previous:** Left arrow, Up arrow, Backspace, PageUp
 - **Blackout:** B key or period (.)
 - **Fullscreen:** F key
+- **Go to slide:** G key (prompts for slide number)
 - **First slide:** Home key
 - **Last slide:** End key
 - **Touch:** Swipe left/right
+
+## Testing & Debug Features
+- **Jump to slide:** Add `?slide=N` to URL (e.g., `index.html?slide=6`)
+- **Debug mode:** Add `?debug=1` to URL to show layout outlines
+- **Combined:** `index.html?slide=3&debug=1`
 
 ## Fragment Animations
 Some slides have click-to-reveal fragments:
@@ -59,16 +65,36 @@ Some slides have click-to-reveal fragments:
 - `kathy.jpg` - Kathy (Fulbright Scholar, Calendar color-coder)
 - `tyler.jpeg` - Tyler (Investor, Meeting time finder)
 
+## CSS Architecture
+
+### Layout Tokens (CSS Variables)
+All sizing is controlled via CSS variables in `:root`:
+- **Content:** `--content-max-width`, `--content-min-width`
+- **Photos:** `--photo-large-w`, `--photo-large-h`, `--photo-small`
+- **Terminal:** `--terminal-min-width`, `--terminal-row-height`, `--terminal-font-size`
+- **Spacing:** `--space-xs` through `--space-2xl`
+
+### Slide Type Classes
+Reusable base classes for common patterns:
+- `.slide-type-quote` - Centered quote with attribution
+- `.slide-type-photos` - Title at top, photo grid below
+- `.slide-type-comparison` - Two boxes side by side
+- `.slide-type-terminal` - Left steps + right terminal
+- `.slide-type-text` - Centered text, flexible
+
 ## Common Modifications
 
 ### Adding/changing a slide
-Edit the HTML in `index.html`. Each slide is a `<div class="slide">` with corresponding CSS.
+Edit the HTML in `index.html`. Each slide is a `<div class="slide">` with corresponding CSS. Consider using a slide type class for common patterns.
 
 ### Changing MBA students
 Update slide 3's `.evidence-grid` HTML. Each person is an `.evidence-person` div with photo, name, role, and project.
 
 ### Adjusting fonts/colors
 Modify the CSS custom properties in `:root` at the top of the `<style>` block.
+
+### Adjusting sizes
+Modify the layout tokens in `:root` (e.g., `--photo-large-w: 380px`).
 
 ### Progress bar
 Automatically calculated based on current slide / total slides. Coral colored at bottom of viewport.
@@ -86,3 +112,9 @@ git add . && git commit -m "message" && git push
 
 ## Testing
 Open `index.html` directly in Chrome. No server needed.
+
+### Quick testing tips
+- **Test specific slide:** `index.html?slide=6` jumps directly to slide 6
+- **Debug layout:** `index.html?debug=1` shows layout outlines
+- **Mobile preview:** Resize browser to 480px wide or use Chrome DevTools mobile emulation
+- **Keyboard shortcut:** Press G to jump to any slide by number
