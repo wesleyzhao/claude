@@ -410,29 +410,32 @@
         }
 
         .inflection-quote {
-            font-size: var(--size-title);
-            font-weight: var(--weight-semibold);
+            font-size: var(--size-hero);
+            font-weight: var(--weight-bold);
             line-height: var(--line-height-tight);
-            letter-spacing: -0.01em;
+            letter-spacing: -0.02em;
             color: var(--text);
-            margin-bottom: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+
+        .inflection-quote::before {
+            content: '"';
+            color: var(--accent);
+        }
+
+        .inflection-quote::after {
+            content: '"';
+            color: var(--accent);
         }
 
         .inflection-quote .highlight {
             color: var(--accent);
         }
 
-        .inflection-subquote {
-            font-size: var(--size-large);
-            font-weight: var(--weight-normal);
-            color: var(--subtle);
-            margin-bottom: var(--space-lg);
-        }
-
         .inflection-attribution {
-            font-size: var(--size-body);
+            font-size: var(--size-large);
             color: var(--subtle);
-            font-weight: var(--weight-normal);
+            font-weight: var(--weight-semibold);
         }
 
         /* ============================================
@@ -772,10 +775,7 @@
              ============================================= -->
         <div class="slide" id="slide-4">
             <div class="slide-content slide-inflection">
-                <p class="inflection-quote">
-                    This is the <span class="highlight">biggest technological revolution</span> of my life.
-                </p>
-                <p class="inflection-subquote">This is clearly bigger than the Internet.</p>
+                <p class="inflection-quote">This is the <span class="highlight">biggest technological revolution</span> of my life.</p>
                 <p class="inflection-attribution">— Marc Andreessen</p>
             </div>
         </div>
