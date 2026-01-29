@@ -502,35 +502,56 @@
            ============================================ */
         .slide-howto {
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .howto-title {
+            font-size: var(--size-title);
+            font-weight: var(--weight-semibold);
+            color: var(--text);
+            margin-bottom: var(--space-lg);
+            letter-spacing: -0.01em;
+        }
+
+        .howto-container {
+            display: flex;
             flex-direction: row;
-            align-items: stretch;
-            gap: var(--space-xl);
-            max-width: 1100px;
+            align-items: flex-start;
+            gap: var(--space-lg);
             width: 100%;
         }
 
         .howto-steps {
-            flex: 0 0 240px;
+            flex: 0 0 180px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            gap: var(--space-lg);
+            gap: 0;
+            padding-top: 58px;
         }
 
         .howto-step {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: var(--space-sm);
+            height: 72px;
+            margin-bottom: 24px;
+        }
+
+        .howto-step:last-child {
+            margin-bottom: 0;
         }
 
         .howto-number {
             flex-shrink: 0;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background: var(--border);
             color: var(--subtle);
-            font-size: var(--size-body);
+            font-size: var(--size-small);
             font-weight: var(--weight-bold);
             display: flex;
             align-items: center;
@@ -544,10 +565,9 @@
         }
 
         .howto-label {
-            font-size: var(--size-large);
+            font-size: var(--size-body);
             font-weight: var(--weight-semibold);
             color: var(--subtle);
-            padding-top: 4px;
             transition: color var(--transition-medium);
         }
 
@@ -628,7 +648,15 @@
         }
 
         .terminal-block {
+            min-height: 72px;
             margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .terminal-block:last-child {
+            margin-bottom: 0;
         }
 
         /* ============================================
@@ -872,47 +900,50 @@
              ============================================= -->
         <div class="slide" id="slide-6">
             <div class="slide-content slide-howto">
-                <div class="howto-steps">
-                    <div class="howto-step" data-fragment="1">
-                        <span class="howto-number">1</span>
-                        <span class="howto-label">Download</span>
-                    </div>
-                    <div class="howto-step" data-fragment="2">
-                        <span class="howto-number">2</span>
-                        <span class="howto-label">Ask for help</span>
-                    </div>
-                    <div class="howto-step" data-fragment="3">
-                        <span class="howto-number">3</span>
-                        <span class="howto-label">Press enter</span>
-                    </div>
-                </div>
-                <div class="terminal">
-                    <div class="terminal-header">
-                        <div class="terminal-btn terminal-btn--red"></div>
-                        <div class="terminal-btn terminal-btn--yellow"></div>
-                        <div class="terminal-btn terminal-btn--green"></div>
-                        <div class="terminal-title">Terminal</div>
-                    </div>
-                    <div class="terminal-body">
-                        <div class="terminal-block" data-fragment="1">
-                            <div class="terminal-line">
-                                <span class="terminal-prompt">$ </span><span class="terminal-command">curl -fsSL https://claude.ai/install.sh | bash</span>
-                            </div>
+                <h2 class="howto-title">How to start</h2>
+                <div class="howto-container">
+                    <div class="howto-steps">
+                        <div class="howto-step" data-fragment="1">
+                            <span class="howto-number">1</span>
+                            <span class="howto-label">Download</span>
                         </div>
-                        <div class="terminal-block" data-fragment="2">
-                            <div class="terminal-line">
-                                <span class="terminal-prompt">$ </span><span class="terminal-command">claude</span>
-                            </div>
-                            <div class="terminal-line">
-                                <span class="terminal-claude">&gt; </span><span class="terminal-typing">Make me a presentation convincing people to use claude code</span>
-                            </div>
+                        <div class="howto-step" data-fragment="2">
+                            <span class="howto-number">2</span>
+                            <span class="howto-label">Ask for help</span>
                         </div>
-                        <div class="terminal-block" data-fragment="3">
-                            <div class="terminal-line">
-                                <span class="terminal-output">Thinking...</span>
+                        <div class="howto-step" data-fragment="3">
+                            <span class="howto-number">3</span>
+                            <span class="howto-label">Press enter</span>
+                        </div>
+                    </div>
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <div class="terminal-btn terminal-btn--red"></div>
+                            <div class="terminal-btn terminal-btn--yellow"></div>
+                            <div class="terminal-btn terminal-btn--green"></div>
+                            <div class="terminal-title">Terminal</div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="terminal-block" data-fragment="1">
+                                <div class="terminal-line">
+                                    <span class="terminal-prompt">$ </span><span class="terminal-command">curl -fsSL https://claude.ai/install.sh | bash</span>
+                                </div>
                             </div>
-                            <div class="terminal-line">
-                                <span class="terminal-success">✓ Done. Your presentation is ready.</span>
+                            <div class="terminal-block" data-fragment="2">
+                                <div class="terminal-line">
+                                    <span class="terminal-prompt">$ </span><span class="terminal-command">claude</span>
+                                </div>
+                                <div class="terminal-line">
+                                    <span class="terminal-claude">&gt; </span><span class="terminal-typing">Make me a presentation convincing people to use claude code</span>
+                                </div>
+                            </div>
+                            <div class="terminal-block" data-fragment="3">
+                                <div class="terminal-line">
+                                    <span class="terminal-output">Thinking...</span>
+                                </div>
+                                <div class="terminal-line">
+                                    <span class="terminal-success">✓ Done. Your presentation is ready.</span>
+                                </div>
                             </div>
                         </div>
                     </div>
