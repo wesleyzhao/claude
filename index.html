@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>One Hour This Week — Claude Code</title>
+    <title>Make Something with Claude Code</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,23 +14,26 @@
         :root {
             /* Colors */
             --bg: #FAFAF8;
-            --bg-slide: #FAFAF8;
+            --bg-dark: #1B1B1B;
             --text: #1B1B1B;
+            --text-light: #FAFAF8;
             --accent: #D4725C;
             --accent-light: #F2DDD7;
             --accent-dark: #B85A45;
-            --subtle: #8A8A85;
-            --border: #E8E8E4;
+            --subtle: #7A7A75;
+            --subtle-light: rgba(250, 250, 248, 0.6);
+            --border: #E5E5E0;
             --white: #FFFFFF;
 
             /* Typography */
             --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            --size-hero: 4.5rem;
-            --size-title: 3rem;
-            --size-large: 2rem;
-            --size-body: 1.25rem;
-            --size-small: 1rem;
-            --size-tiny: 0.85rem;
+            --size-display: clamp(3rem, 6vw, 5rem);
+            --size-hero: clamp(2.5rem, 5vw, 4rem);
+            --size-title: clamp(1.75rem, 3.5vw, 2.75rem);
+            --size-large: clamp(1.25rem, 2.5vw, 1.75rem);
+            --size-body: clamp(1rem, 1.5vw, 1.25rem);
+            --size-small: clamp(0.875rem, 1.2vw, 1rem);
+            --size-tiny: 0.8rem;
             --weight-light: 300;
             --weight-normal: 400;
             --weight-medium: 500;
@@ -38,26 +41,27 @@
             --weight-bold: 700;
             --weight-black: 800;
             --line-height: 1.5;
-            --line-height-tight: 1.15;
+            --line-height-tight: 1.2;
 
             /* Spacing */
             --space-xs: 0.5rem;
             --space-sm: 1rem;
-            --space-md: 2rem;
-            --space-lg: 3rem;
+            --space-md: 1.5rem;
+            --space-lg: 2.5rem;
             --space-xl: 4rem;
             --space-2xl: 6rem;
 
             /* Transitions */
-            --transition-slide: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-fast: 0.2s ease;
-            --transition-medium: 0.4s ease;
+            --transition-slide: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: 0.15s ease;
+            --transition-medium: 0.3s ease;
 
             /* Misc */
             --radius: 12px;
             --radius-sm: 8px;
-            --shadow: 0 4px 24px rgba(27, 27, 27, 0.08);
-            --shadow-lg: 0 8px 40px rgba(27, 27, 27, 0.12);
+            --radius-lg: 20px;
+            --shadow: 0 4px 20px rgba(27, 27, 27, 0.06);
+            --shadow-lg: 0 8px 32px rgba(27, 27, 27, 0.1);
         }
 
         /* ============================================
@@ -103,10 +107,10 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: var(--space-xl) var(--space-2xl);
-            background: var(--bg-slide);
+            padding: var(--space-xl);
+            background: var(--bg);
             opacity: 0;
-            transform: translateX(30px);
+            transform: translateX(20px);
             transition: opacity var(--transition-slide),
                         transform var(--transition-slide);
             pointer-events: none;
@@ -122,12 +126,24 @@
 
         .slide.prev {
             opacity: 0;
-            transform: translateX(-30px);
+            transform: translateX(-20px);
         }
 
         .slide-content {
-            max-width: 1000px;
             width: 100%;
+            max-width: 960px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ============================================
+           DARK SLIDE VARIANT
+           ============================================ */
+        .slide--dark {
+            background: var(--bg-dark);
+            color: var(--text-light);
         }
 
         /* ============================================
@@ -135,7 +151,7 @@
            ============================================ */
         [data-fragment] {
             opacity: 0;
-            transform: translateY(12px);
+            transform: translateY(10px);
             transition: opacity var(--transition-medium),
                         transform var(--transition-medium);
         }
@@ -158,7 +174,7 @@
             z-index: 1000;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.25s ease;
         }
 
         .blackout.active {
@@ -177,24 +193,68 @@
             background: var(--accent);
             z-index: 100;
             transition: width var(--transition-slide);
-            border-radius: 0 2px 2px 0;
         }
 
         /* ============================================
-           TYPOGRAPHY UTILITIES
+           SLIDE NUMBER
            ============================================ */
-        .text-hero { font-size: var(--size-hero); font-weight: var(--weight-bold); line-height: var(--line-height-tight); }
-        .text-title { font-size: var(--size-title); font-weight: var(--weight-semibold); line-height: var(--line-height-tight); }
-        .text-large { font-size: var(--size-large); font-weight: var(--weight-normal); line-height: var(--line-height); }
-        .text-body { font-size: var(--size-body); font-weight: var(--weight-normal); line-height: var(--line-height); }
-        .text-small { font-size: var(--size-small); font-weight: var(--weight-normal); line-height: var(--line-height); }
-        .text-subtle { color: var(--subtle); }
-        .text-accent { color: var(--accent); }
-        .text-center { text-align: center; }
-        .text-bold { font-weight: var(--weight-bold); }
+        .slide-number {
+            position: fixed;
+            bottom: 20px;
+            right: 28px;
+            font-size: var(--size-tiny);
+            color: var(--border);
+            z-index: 50;
+            font-variant-numeric: tabular-nums;
+            pointer-events: none;
+            letter-spacing: 0.02em;
+        }
+
+        .slide--dark ~ .slide-number,
+        .slide--dark.active ~ .slide-number {
+            color: rgba(255,255,255,0.25);
+        }
 
         /* ============================================
-           SLIDE 1: EMERSON
+           SLIDE 1: RUDY QUOTE (Dark)
+           ============================================ */
+        .slide-quote {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .quote-text {
+            font-size: var(--size-display);
+            font-weight: var(--weight-bold);
+            line-height: var(--line-height-tight);
+            letter-spacing: -0.03em;
+            color: var(--text-light);
+            margin-bottom: var(--space-lg);
+        }
+
+        .quote-text::before {
+            content: '"';
+            color: var(--accent);
+        }
+
+        .quote-text::after {
+            content: '"';
+            color: var(--accent);
+        }
+
+        .quote-attribution {
+            font-size: var(--size-body);
+            color: var(--subtle-light);
+            font-weight: var(--weight-normal);
+        }
+
+        .quote-attribution strong {
+            color: var(--text-light);
+            font-weight: var(--weight-semibold);
+        }
+
+        /* ============================================
+           SLIDE 2: EMERSON
            ============================================ */
         .slide-emerson {
             display: flex;
@@ -209,10 +269,10 @@
         }
 
         .photo-placeholder {
-            width: 320px;
-            height: 320px;
-            border-radius: var(--radius);
-            background: linear-gradient(135deg, var(--accent-light) 0%, var(--border) 100%);
+            width: 300px;
+            height: 300px;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(145deg, var(--accent-light) 0%, var(--border) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -232,307 +292,303 @@
         }
 
         .emerson-text {
-            max-width: 400px;
+            max-width: 380px;
         }
 
-        .emerson-text h1 {
-            margin-bottom: var(--space-sm);
-            letter-spacing: -0.02em;
-        }
-
-        .emerson-text p {
-            color: var(--subtle);
-        }
-
-        /* ============================================
-           SLIDE 2: THE SUITCASE
-           ============================================ */
-        .slide-suitcase {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-lg);
-        }
-
-        .book-shelf {
-            display: flex;
-            gap: 14px;
-            align-items: flex-end;
-            padding: var(--space-md) var(--space-md) var(--space-sm);
-            border-bottom: 3px solid var(--border);
-        }
-
-        .book-spine {
-            width: 72px;
-            border-radius: 4px 8px 8px 4px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-xs);
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15),
-                        inset -2px 0 4px rgba(0, 0, 0, 0.1);
-            color: rgba(255, 255, 255, 0.92);
-            position: relative;
-            transition: transform var(--transition-fast);
-        }
-
-        .book-spine:nth-child(1) { height: 210px; background: #A0522D; }
-        .book-spine:nth-child(2) { height: 190px; background: #2E6B4F; }
-        .book-spine:nth-child(3) { height: 224px; background: #6B3A2E; }
-        .book-spine:nth-child(4) { height: 195px; background: #8B2252; }
-        .book-spine:nth-child(5) { height: 205px; background: #3B6B8B; }
-
-        .book-emoji {
-            font-size: 1.8rem;
-        }
-
-        .book-title {
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            transform: rotate(180deg);
-            font-size: 0.7rem;
-            font-weight: var(--weight-semibold);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 0.85;
-        }
-
-        .suitcase-quote {
-            max-width: 600px;
-            text-align: center;
-        }
-
-        .suitcase-quote p {
-            font-size: var(--size-large);
-            font-weight: var(--weight-light);
-            font-style: italic;
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        .suitcase-quote em {
-            font-style: normal;
-            color: var(--accent);
-            font-weight: var(--weight-semibold);
-        }
-
-        /* ============================================
-           SLIDE 3: THE ASK
-           ============================================ */
-        .slide-ask {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .ask-text {
-            font-size: clamp(2rem, 4.5vw, 3.5rem);
-            font-weight: var(--weight-semibold);
-            line-height: 1.4;
-            max-width: 800px;
-            letter-spacing: -0.02em;
-        }
-
-        .ask-text .highlight {
-            color: var(--accent);
+        .emerson-name {
+            font-size: var(--size-hero);
             font-weight: var(--weight-bold);
-        }
-
-        /* ============================================
-           SLIDE 4: THE SHIFT
-           ============================================ */
-        .slide-shift {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-lg);
-        }
-
-        .shift-title {
-            margin-bottom: var(--space-sm);
-        }
-
-        .shift-visual {
-            display: flex;
-            align-items: center;
-            gap: var(--space-lg);
-        }
-
-        .shift-box {
-            text-align: center;
-            padding: var(--space-lg) var(--space-xl);
-            border-radius: var(--radius);
-            min-width: 260px;
-        }
-
-        .shift-before {
-            background: var(--border);
-        }
-
-        .shift-after {
-            background: var(--accent-light);
-            border: 2px solid var(--accent);
-        }
-
-        .shift-label {
-            display: block;
-            font-size: var(--size-large);
-            font-weight: var(--weight-semibold);
+            letter-spacing: -0.02em;
             margin-bottom: var(--space-xs);
-        }
-
-        .shift-before .shift-label {
-            color: var(--subtle);
-        }
-
-        .shift-after .shift-label {
-            color: var(--accent-dark);
-        }
-
-        .shift-desc {
-            font-size: var(--size-small);
-            color: var(--subtle);
-        }
-
-        .shift-arrow {
-            flex-shrink: 0;
-        }
-
-        /* ============================================
-           SLIDE 5: OBJECTIONS
-           ============================================ */
-        .slide-objections {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .objections-title {
-            margin-bottom: var(--space-lg);
-        }
-
-        .objection-list {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-md);
-            max-width: 700px;
-            width: 100%;
-        }
-
-        .objection {
-            font-size: var(--size-large);
-            font-weight: var(--weight-light);
-            font-style: italic;
             color: var(--text);
-            padding-left: var(--space-md);
-            border-left: 3px solid var(--border);
-            line-height: 1.6;
-            transition: border-color var(--transition-medium);
         }
 
-        .objection.visible {
-            border-left-color: var(--accent);
+        .emerson-tagline {
+            font-size: var(--size-large);
+            color: var(--subtle);
+            line-height: var(--line-height);
+            font-weight: var(--weight-normal);
         }
 
-        .objection em {
-            font-style: normal;
+        .emerson-tagline em {
+            font-style: italic;
             color: var(--accent);
-            font-weight: var(--weight-semibold);
         }
 
         /* ============================================
-           SLIDE 6: EVIDENCE
+           SLIDE 3: EVIDENCE / WHAT PEOPLE BUILT
            ============================================ */
         .slide-evidence {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            width: 100%;
         }
 
         .evidence-title {
+            font-size: var(--size-title);
+            font-weight: var(--weight-semibold);
             margin-bottom: var(--space-lg);
+            text-align: center;
+            letter-spacing: -0.01em;
         }
 
         .evidence-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: var(--space-md);
-            max-width: 700px;
             width: 100%;
+            max-width: 720px;
         }
 
         .evidence-card {
             background: var(--white);
             border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: var(--space-md);
+            border-radius: var(--radius);
+            padding: var(--space-md) var(--space-lg);
             display: flex;
             flex-direction: column;
-            gap: var(--space-xs);
+            gap: 4px;
             box-shadow: var(--shadow);
             transition: box-shadow var(--transition-medium),
-                        transform var(--transition-medium);
+                        border-color var(--transition-medium);
         }
 
         .evidence-card.visible {
+            border-color: var(--accent-light);
             box-shadow: var(--shadow-lg);
         }
 
-        .evidence-name {
+        .evidence-project {
             font-size: var(--size-body);
-            font-weight: var(--weight-bold);
-            color: var(--accent);
+            font-weight: var(--weight-semibold);
+            color: var(--text);
+            line-height: var(--line-height-tight);
         }
 
-        .evidence-built {
-            font-size: var(--size-body);
-            color: var(--text);
-            line-height: 1.5;
+        .evidence-desc {
+            font-size: var(--size-small);
+            color: var(--subtle);
+            line-height: var(--line-height);
         }
 
         /* ============================================
-           SLIDE 7: CTA
+           SLIDE 4: ANDREESSEN QUOTE
+           ============================================ */
+        .slide-inflection {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .inflection-quote {
+            font-size: var(--size-hero);
+            font-weight: var(--weight-bold);
+            line-height: var(--line-height-tight);
+            letter-spacing: -0.02em;
+            color: var(--text);
+            margin-bottom: var(--space-lg);
+        }
+
+        .inflection-quote .highlight {
+            color: var(--accent);
+        }
+
+        .inflection-attribution {
+            font-size: var(--size-body);
+            color: var(--subtle);
+            font-weight: var(--weight-normal);
+        }
+
+        /* ============================================
+           SLIDE 5: WHY CLAUDE CODE
+           ============================================ */
+        .slide-why {
+            text-align: center;
+            max-width: 700px;
+        }
+
+        .why-title {
+            font-size: var(--size-title);
+            font-weight: var(--weight-semibold);
+            margin-bottom: var(--space-lg);
+            letter-spacing: -0.01em;
+        }
+
+        .why-comparison {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+
+        .why-box {
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius);
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .why-box--other {
+            background: var(--border);
+        }
+
+        .why-box--claude {
+            background: var(--accent-light);
+            border: 2px solid var(--accent);
+        }
+
+        .why-box-label {
+            font-size: var(--size-body);
+            font-weight: var(--weight-semibold);
+            margin-bottom: 4px;
+        }
+
+        .why-box--other .why-box-label {
+            color: var(--subtle);
+        }
+
+        .why-box--claude .why-box-label {
+            color: var(--accent-dark);
+        }
+
+        .why-box-desc {
+            font-size: var(--size-small);
+            color: var(--subtle);
+        }
+
+        .why-metaphor {
+            font-size: var(--size-large);
+            color: var(--text);
+            font-style: italic;
+            font-weight: var(--weight-light);
+        }
+
+        .why-metaphor em {
+            font-style: normal;
+            font-weight: var(--weight-semibold);
+            color: var(--accent);
+        }
+
+        /* ============================================
+           SLIDE 6: HOW TO START
+           ============================================ */
+        .slide-howto {
+            text-align: center;
+            max-width: 700px;
+        }
+
+        .howto-tagline {
+            font-size: var(--size-large);
+            color: var(--subtle);
+            font-style: italic;
+            margin-bottom: var(--space-lg);
+        }
+
+        .howto-tagline em {
+            font-style: normal;
+            color: var(--accent);
+            font-weight: var(--weight-semibold);
+        }
+
+        .howto-steps {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            text-align: left;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .howto-step {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+        }
+
+        .howto-number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: var(--white);
+            font-size: var(--size-body);
+            font-weight: var(--weight-bold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .howto-text {
+            font-size: var(--size-large);
+            color: var(--text);
+            line-height: var(--line-height);
+            padding-top: 6px;
+        }
+
+        .howto-text code {
+            background: var(--border);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.9em;
+        }
+
+        /* ============================================
+           SLIDE 7: THE COUPLET
+           ============================================ */
+        .slide-couplet {
+            text-align: center;
+            max-width: 700px;
+        }
+
+        .couplet-text {
+            font-size: var(--size-hero);
+            font-weight: var(--weight-semibold);
+            line-height: 1.4;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .couplet-text .line {
+            display: block;
+        }
+
+        .couplet-text .highlight {
+            color: var(--accent);
+        }
+
+        /* ============================================
+           SLIDE 8: CTA
            ============================================ */
         .slide-cta {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            text-align: center;
             gap: var(--space-lg);
         }
 
         .cta-headline {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: var(--size-display);
             font-weight: var(--weight-black);
             color: var(--accent);
             letter-spacing: -0.03em;
             line-height: var(--line-height-tight);
-            text-align: center;
         }
 
-        .cta-details {
-            text-align: center;
-        }
-
-        .cta-url {
+        .cta-subline {
             font-size: var(--size-large);
-            font-weight: var(--weight-semibold);
-            color: var(--text);
-            margin-top: var(--space-xs);
-            letter-spacing: -0.01em;
+            color: var(--subtle);
+            font-weight: var(--weight-normal);
         }
 
         .qr-placeholder {
-            width: 140px;
-            height: 140px;
+            width: 160px;
+            height: 160px;
             border: 2px dashed var(--border);
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -543,19 +599,10 @@
             text-transform: uppercase;
         }
 
-        /* ============================================
-           SLIDE NUMBER (subtle)
-           ============================================ */
-        .slide-number {
-            position: fixed;
-            bottom: 16px;
-            right: 24px;
-            font-size: var(--size-tiny);
-            color: var(--border);
-            z-index: 50;
-            font-variant-numeric: tabular-nums;
-            pointer-events: none;
-            transition: color var(--transition-fast);
+        .cta-footer {
+            font-size: var(--size-body);
+            color: var(--text);
+            font-weight: var(--weight-medium);
         }
 
         /* ============================================
@@ -563,7 +610,7 @@
            ============================================ */
         @media (max-width: 768px) {
             .slide {
-                padding: var(--space-md);
+                padding: var(--space-lg) var(--space-md);
             }
 
             .slide-emerson {
@@ -571,37 +618,32 @@
                 text-align: center;
             }
 
+            .emerson-text {
+                max-width: 100%;
+                text-align: center;
+            }
+
             .photo-placeholder {
-                width: 200px;
-                height: 200px;
-            }
-
-            .shift-visual {
-                flex-direction: column;
-            }
-
-            .shift-box {
-                min-width: 200px;
-                padding: var(--space-md);
-            }
-
-            .shift-arrow {
-                transform: rotate(90deg);
+                width: 220px;
+                height: 220px;
             }
 
             .evidence-grid {
                 grid-template-columns: 1fr;
             }
 
-            .book-spine {
-                width: 55px;
+            .why-comparison {
+                flex-direction: column;
+                gap: var(--space-md);
             }
 
-            .book-spine:nth-child(1) { height: 160px; }
-            .book-spine:nth-child(2) { height: 145px; }
-            .book-spine:nth-child(3) { height: 170px; }
-            .book-spine:nth-child(4) { height: 150px; }
-            .book-spine:nth-child(5) { height: 158px; }
+            .why-box {
+                min-width: 180px;
+            }
+
+            .howto-steps {
+                padding: 0 var(--space-sm);
+            }
         }
     </style>
 </head>
@@ -609,9 +651,19 @@
     <div class="presentation">
 
         <!-- =============================================
-             SLIDE 1: EMERSON
+             SLIDE 1: RUDY QUOTE (Dark background)
              ============================================= -->
-        <div class="slide active" id="slide-1">
+        <div class="slide slide--dark active" id="slide-1">
+            <div class="slide-content slide-quote">
+                <p class="quote-text">It was like a coming to Jesus moment.</p>
+                <p class="quote-attribution"><strong>Michael Rudy</strong>, after one hour with Claude Code</p>
+            </div>
+        </div>
+
+        <!-- =============================================
+             SLIDE 2: EMERSON
+             ============================================= -->
+        <div class="slide" id="slide-2">
             <div class="slide-content slide-emerson">
                 <div class="photo-frame">
                     <div class="photo-placeholder">
@@ -619,142 +671,119 @@
                     </div>
                 </div>
                 <div class="emerson-text">
-                    <h1 class="text-hero">Emerson</h1>
-                    <p class="text-large text-subtle">She's five. She made a video game.</p>
+                    <h1 class="emerson-name">Emerson</h1>
+                    <p class="emerson-tagline">It's so easy,<br>an <em>Emerson</em> can do it.</p>
                 </div>
             </div>
         </div>
 
         <!-- =============================================
-             SLIDE 2: THE SUITCASE
-             ============================================= -->
-        <div class="slide" id="slide-2">
-            <div class="slide-content slide-suitcase">
-                <div class="book-shelf">
-                    <div class="book-spine">
-                        <span class="book-emoji">&#x1F42B;</span>
-                        <span class="book-title">Perl</span>
-                    </div>
-                    <div class="book-spine">
-                        <span class="book-emoji">&#x1F40D;</span>
-                        <span class="book-title">Python</span>
-                    </div>
-                    <div class="book-spine">
-                        <span class="book-emoji">&#x2615;</span>
-                        <span class="book-title">Java</span>
-                    </div>
-                    <div class="book-spine">
-                        <span class="book-emoji">&#x1F48E;</span>
-                        <span class="book-title">Ruby</span>
-                    </div>
-                    <div class="book-spine">
-                        <span class="book-emoji">&#x1F43F;&#xFE0F;</span>
-                        <span class="book-title">Go</span>
-                    </div>
-                </div>
-                <blockquote class="suitcase-quote">
-                    <p>&ldquo;This is not for me.<br>This is for <em>suitcase people</em>.&rdquo;</p>
-                </blockquote>
-            </div>
-        </div>
-
-        <!-- =============================================
-             SLIDE 3: THE ASK
+             SLIDE 3: WHAT PEOPLE BUILT
              ============================================= -->
         <div class="slide" id="slide-3">
-            <div class="slide-content slide-ask">
-                <p class="ask-text">
-                    Spend <span class="highlight">one hour</span> this week<br>
-                    building something real<br>
-                    with <span class="highlight">Claude Code</span>.
+            <div class="slide-content slide-evidence">
+                <h2 class="evidence-title">What GSB students built</h2>
+                <div class="evidence-grid">
+                    <div class="evidence-card" data-fragment="1">
+                        <span class="evidence-project">Mutual free time finder</span>
+                        <span class="evidence-desc">Scans calendars, finds openings</span>
+                    </div>
+                    <div class="evidence-card" data-fragment="2">
+                        <span class="evidence-project">Nurse triage assistant</span>
+                        <span class="evidence-desc">Helps prioritize patient intake</span>
+                    </div>
+                    <div class="evidence-card" data-fragment="3">
+                        <span class="evidence-project">Elder companion</span>
+                        <span class="evidence-desc">Listens, talks back, keeps company</span>
+                    </div>
+                    <div class="evidence-card" data-fragment="4">
+                        <span class="evidence-project">Startup prototype</span>
+                        <span class="evidence-desc">From idea to working demo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================
+             SLIDE 4: ANDREESSEN / INFLECTION POINT
+             ============================================= -->
+        <div class="slide" id="slide-4">
+            <div class="slide-content slide-inflection">
+                <p class="inflection-quote">
+                    The <span class="highlight">single biggest</span><br>
+                    inflection point<br>
+                    of our lifetime.
+                </p>
+                <p class="inflection-attribution">— Marc Andreessen</p>
+            </div>
+        </div>
+
+        <!-- =============================================
+             SLIDE 5: WHY CLAUDE CODE
+             ============================================= -->
+        <div class="slide" id="slide-5">
+            <div class="slide-content slide-why">
+                <h2 class="why-title">Why Claude Code?</h2>
+                <div class="why-comparison">
+                    <div class="why-box why-box--other">
+                        <p class="why-box-label">Lovable, Replit, etc.</p>
+                        <p class="why-box-desc">Nice apartment</p>
+                    </div>
+                    <div class="why-box why-box--claude">
+                        <p class="why-box-label">Claude Code</p>
+                        <p class="why-box-desc">Plot of land</p>
+                    </div>
+                </div>
+                <p class="why-metaphor"><em>Raw access</em> to your computer.<br>Anything you can do, it can do.</p>
+            </div>
+        </div>
+
+        <!-- =============================================
+             SLIDE 6: HOW TO START
+             ============================================= -->
+        <div class="slide" id="slide-6">
+            <div class="slide-content slide-howto">
+                <p class="howto-tagline">It's so easy, an <em>MBA</em> can do it.</p>
+                <div class="howto-steps">
+                    <div class="howto-step" data-fragment="1">
+                        <span class="howto-number">1</span>
+                        <span class="howto-text">Download it</span>
+                    </div>
+                    <div class="howto-step" data-fragment="2">
+                        <span class="howto-number">2</span>
+                        <span class="howto-text">Say: <code>Help me make X</code></span>
+                    </div>
+                    <div class="howto-step" data-fragment="3">
+                        <span class="howto-number">3</span>
+                        <span class="howto-text">Press enter</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================
+             SLIDE 7: THE COUPLET
+             ============================================= -->
+        <div class="slide" id="slide-7">
+            <div class="slide-content slide-couplet">
+                <p class="couplet-text">
+                    <span class="line">Leave the CS undergrads <span class="highlight">alone</span>.</span>
+                    <span class="line">You can do it on your <span class="highlight">own</span>.</span>
                 </p>
             </div>
         </div>
 
         <!-- =============================================
-             SLIDE 4: THE SHIFT
+             SLIDE 8: CTA
              ============================================= -->
-        <div class="slide" id="slide-4">
-            <div class="slide-content slide-shift">
-                <h2 class="text-title text-center shift-title">The tools changed.</h2>
-                <div class="shift-visual">
-                    <div class="shift-box shift-before">
-                        <span class="shift-label">Autocomplete</span>
-                        <p class="shift-desc">Suggesting the next word</p>
-                    </div>
-                    <div class="shift-arrow">
-                        <svg width="60" height="24" viewBox="0 0 60 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 12H54M54 12L44 4M54 12L44 20" stroke="#D4725C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <div class="shift-box shift-after">
-                        <span class="shift-label">Junior Developer</span>
-                        <p class="shift-desc">Autonomous. Capable. Iterating.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- =============================================
-             SLIDE 5: OBJECTIONS
-             ============================================= -->
-        <div class="slide" id="slide-5">
-            <div class="slide-content slide-objections">
-                <h2 class="text-title text-center objections-title">But&hellip;</h2>
-                <div class="objection-list">
-                    <p class="objection" data-fragment="1">
-                        &ldquo;But I'm going to be a <em>manager</em>&hellip;&rdquo;
-                    </p>
-                    <p class="objection" data-fragment="2">
-                        &ldquo;But I don't have <em>time</em>&hellip;&rdquo;
-                    </p>
-                    <p class="objection" data-fragment="3">
-                        &ldquo;But I don't have an <em>idea</em>&hellip;&rdquo;
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- =============================================
-             SLIDE 6: EVIDENCE
-             ============================================= -->
-        <div class="slide" id="slide-6">
-            <div class="slide-content slide-evidence">
-                <h2 class="text-title text-center evidence-title">What people built</h2>
-                <div class="evidence-grid">
-                    <div class="evidence-card" data-fragment="1">
-                        <span class="evidence-name">Alex</span>
-                        <span class="evidence-built">Portfolio tracker that pulls live data</span>
-                    </div>
-                    <div class="evidence-card" data-fragment="2">
-                        <span class="evidence-name">Morgan</span>
-                        <span class="evidence-built">Automated their case prep workflow</span>
-                    </div>
-                    <div class="evidence-card" data-fragment="3">
-                        <span class="evidence-name">Jordan</span>
-                        <span class="evidence-built">Birthday gift app for their partner</span>
-                    </div>
-                    <div class="evidence-card" data-fragment="4">
-                        <span class="evidence-name">Riley</span>
-                        <span class="evidence-built">Prototyped their startup idea</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- =============================================
-             SLIDE 7: CTA
-             ============================================= -->
-        <div class="slide" id="slide-7">
+        <div class="slide" id="slide-8">
             <div class="slide-content slide-cta">
-                <h1 class="cta-headline">One hour. This week.</h1>
-                <div class="cta-details">
-                    <p class="text-body text-subtle">Download Claude Code</p>
-                    <p class="cta-url">claude.ai/download</p>
-                </div>
+                <h1 class="cta-headline">Make something<br>with Claude Code.</h1>
+                <p class="cta-subline">One hour. This week.</p>
                 <div class="qr-placeholder">
                     <span>QR</span>
                 </div>
+                <p class="cta-footer">I'm happy to help.</p>
             </div>
         </div>
 
@@ -770,13 +799,13 @@
         'use strict';
 
         // ── State ──────────────────────────────────────
-        const slides = document.querySelectorAll('.slide');
-        const blackout = document.getElementById('blackout');
-        const progress = document.getElementById('progress');
-        const slideNumber = document.getElementById('slide-number');
-        const totalSlides = slides.length;
-        let currentSlide = 0;
-        let isBlackout = false;
+        var slides = document.querySelectorAll('.slide');
+        var blackout = document.getElementById('blackout');
+        var progress = document.getElementById('progress');
+        var slideNumber = document.getElementById('slide-number');
+        var totalSlides = slides.length;
+        var currentSlide = 0;
+        var isBlackout = false;
 
         // ── Fragments ──────────────────────────────────
         function getFragments(slideEl) {
@@ -824,35 +853,38 @@
             }
         }
 
+        // ── Update slide number color for dark slides ──
+        function updateSlideNumberColor() {
+            var isDark = slides[currentSlide].classList.contains('slide--dark');
+            slideNumber.style.color = isDark ? 'rgba(255,255,255,0.25)' : '';
+        }
+
         // ── Navigation ────────────────────────────────
         function goToSlide(index) {
             if (index < 0 || index >= totalSlides || index === currentSlide) return;
 
             var forward = index > currentSlide;
 
-            // Remove active/prev from all slides
             for (var i = 0; i < slides.length; i++) {
                 slides[i].classList.remove('active', 'prev');
             }
 
-            // Mark the old slide
             if (forward) {
                 slides[currentSlide].classList.add('prev');
             }
-            // If going backward, reset fragments on the slide we're leaving
             if (!forward) {
                 resetFragments(slides[currentSlide]);
             }
 
             currentSlide = index;
 
-            // When going backward TO a slide, show all its fragments
             if (!forward) {
                 showAllFragments(slides[currentSlide]);
             }
 
             slides[currentSlide].classList.add('active');
             updateProgress();
+            updateSlideNumberColor();
         }
 
         function next() {
@@ -893,6 +925,7 @@
         document.addEventListener('keydown', function(e) {
             switch (e.key) {
                 case 'ArrowRight':
+                case 'ArrowDown':
                 case ' ':
                 case 'Enter':
                 case 'PageDown':
@@ -900,6 +933,7 @@
                     next();
                     break;
                 case 'ArrowLeft':
+                case 'ArrowUp':
                 case 'Backspace':
                 case 'PageUp':
                     e.preventDefault();
@@ -916,6 +950,14 @@
                     break;
                 case 'Escape':
                     if (isBlackout) toggleBlackout();
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    goToSlide(0);
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    goToSlide(totalSlides - 1);
                     break;
             }
         });
@@ -940,6 +982,7 @@
 
         // ── Init ───────────────────────────────────────
         updateProgress();
+        updateSlideNumberColor();
 
     })();
     </script>
