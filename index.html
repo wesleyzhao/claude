@@ -410,16 +410,23 @@
         }
 
         .inflection-quote {
-            font-size: var(--size-hero);
-            font-weight: var(--weight-bold);
+            font-size: var(--size-title);
+            font-weight: var(--weight-semibold);
             line-height: var(--line-height-tight);
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
             color: var(--text);
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-sm);
         }
 
         .inflection-quote .highlight {
             color: var(--accent);
+        }
+
+        .inflection-subquote {
+            font-size: var(--size-large);
+            font-weight: var(--weight-normal);
+            color: var(--subtle);
+            margin-bottom: var(--space-lg);
         }
 
         .inflection-attribution {
@@ -766,9 +773,9 @@
         <div class="slide" id="slide-4">
             <div class="slide-content slide-inflection">
                 <p class="inflection-quote">
-                    This is the <span class="highlight">biggest technological revolution</span> of my life.<br>
-                    This is clearly bigger than the Internet.
+                    This is the <span class="highlight">biggest technological revolution</span> of my life.
                 </p>
+                <p class="inflection-subquote">This is clearly bigger than the Internet.</p>
                 <p class="inflection-attribution">— Marc Andreessen</p>
             </div>
         </div>
