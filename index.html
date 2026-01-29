@@ -249,6 +249,29 @@
         }
 
         /* ============================================
+           SHARED: "So easy" slide title
+           ============================================ */
+        .so-easy-title {
+            font-size: var(--size-title);
+            color: var(--text);
+            line-height: var(--line-height-tight);
+            font-weight: var(--weight-semibold);
+            letter-spacing: -0.01em;
+            text-align: center;
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            padding: 0 var(--space-xl);
+        }
+
+        .so-easy-title em {
+            font-style: normal;
+            color: var(--accent);
+        }
+
+        /* ============================================
            SLIDE 2: EMERSON
            ============================================ */
         .slide-emerson {
@@ -259,29 +282,16 @@
             text-align: center;
         }
 
-        .emerson-tagline {
-            font-size: var(--size-title);
-            color: var(--text);
-            line-height: var(--line-height-tight);
-            font-weight: var(--weight-semibold);
-            letter-spacing: -0.01em;
-            margin-bottom: var(--space-xl);
-        }
-
-        .emerson-tagline em {
-            font-style: normal;
-            color: var(--accent);
-        }
-
         .emerson-photos {
             display: flex;
             gap: var(--space-lg);
             justify-content: center;
+            margin-top: var(--space-lg);
         }
 
         .emerson-photo {
-            width: 280px;
-            height: 280px;
+            width: 340px;
+            height: 340px;
             border-radius: 50%;
             background: linear-gradient(145deg, var(--accent-light) 0%, var(--border) 100%);
             display: flex;
@@ -312,17 +322,8 @@
             width: 100%;
         }
 
-        .evidence-title {
-            font-size: var(--size-title);
-            font-weight: var(--weight-semibold);
-            margin-bottom: var(--space-xl);
-            text-align: center;
-            letter-spacing: -0.01em;
-        }
-
-        .evidence-title em {
-            font-style: normal;
-            color: var(--accent);
+        .slide-evidence .so-easy-title {
+            /* Uses shared .so-easy-title styles */
         }
 
         .evidence-grid {
@@ -331,6 +332,7 @@
             gap: var(--space-lg);
             width: 100%;
             max-width: 900px;
+            margin-top: var(--space-lg);
         }
 
         .evidence-person {
@@ -626,13 +628,17 @@
                 padding: var(--space-lg) var(--space-md);
             }
 
+            .so-easy-title {
+                top: 12%;
+            }
+
             .emerson-photos {
                 gap: var(--space-md);
             }
 
             .emerson-photo {
-                width: 160px;
-                height: 160px;
+                width: 180px;
+                height: 180px;
             }
 
             .evidence-grid {
@@ -678,7 +684,7 @@
              ============================================= -->
         <div class="slide" id="slide-2">
             <div class="slide-content slide-emerson">
-                <h2 class="emerson-tagline">It's so easy, an <em>Emerson</em> can do it.</h2>
+                <h2 class="so-easy-title">It's so easy, an <em>Emerson</em> can do it.</h2>
                 <div class="emerson-photos">
                     <div class="emerson-photo"><img src="emerson-dimsum.jpg" alt="Emerson"></div>
                     <div class="emerson-photo"><img src="emerson-gaming.jpg" alt="Emerson gaming"></div>
@@ -691,7 +697,7 @@
              ============================================= -->
         <div class="slide" id="slide-3">
             <div class="slide-content slide-evidence">
-                <h2 class="evidence-title">It's so easy, an <em>MBA</em> can do it.</h2>
+                <h2 class="so-easy-title">It's so easy, an <em>MBA</em> can do it.</h2>
                 <div class="evidence-grid">
                     <div class="evidence-person" data-fragment="1">
                         <div class="evidence-photo"><span>photo</span></div>
