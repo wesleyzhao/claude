@@ -510,11 +510,12 @@
         }
 
         /* ============================================
-           SLIDE 6: HOW TO START
+           SLIDE 6: HOW TO START (Terminal)
            ============================================ */
         .slide-howto {
             text-align: center;
-            max-width: 700px;
+            max-width: 800px;
+            width: 100%;
         }
 
         .howto-title {
@@ -525,48 +526,104 @@
             margin-bottom: var(--space-lg);
         }
 
-        .howto-steps {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-md);
+        .terminal {
+            background: #1a1a2e;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             text-align: left;
-            max-width: 500px;
-            margin: 0 auto;
+            width: 100%;
         }
 
-        .howto-step {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-md);
-        }
-
-        .howto-number {
-            flex-shrink: 0;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--accent);
-            color: var(--white);
-            font-size: var(--size-body);
-            font-weight: var(--weight-bold);
+        .terminal-header {
+            background: #2d2d3a;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 8px;
         }
 
-        .howto-text {
-            font-size: var(--size-large);
-            color: var(--text);
-            line-height: var(--line-height);
-            padding-top: 6px;
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
         }
 
-        .howto-text code {
-            background: var(--border);
-            padding: 2px 8px;
-            border-radius: 4px;
+        .terminal-btn--red { background: #ff5f57; }
+        .terminal-btn--yellow { background: #febc2e; }
+        .terminal-btn--green { background: #28c840; }
+
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            color: #888;
+            font-size: 13px;
             font-family: 'SF Mono', Monaco, monospace;
-            font-size: 0.9em;
+            margin-right: 52px;
+        }
+
+        .terminal-body {
+            padding: 24px;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 15px;
+            line-height: 1.7;
+            min-height: 280px;
+        }
+
+        .terminal-line {
+            margin-bottom: 16px;
+        }
+
+        .terminal-prompt {
+            color: #7ee787;
+        }
+
+        .terminal-command {
+            color: #f0f0f0;
+        }
+
+        .terminal-output {
+            color: #8b949e;
+            margin-left: 0;
+        }
+
+        .terminal-claude {
+            color: var(--accent);
+        }
+
+        .terminal-typing {
+            color: #f0f0f0;
+        }
+
+        .terminal-success {
+            color: #7ee787;
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 18px;
+            background: #f0f0f0;
+            margin-left: 2px;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .terminal-step {
+            margin-bottom: 20px;
+        }
+
+        .terminal-step-label {
+            color: #6e7681;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
         }
 
         /* ============================================
@@ -801,23 +858,43 @@
         </div>
 
         <!-- =============================================
-             SLIDE 6: HOW TO START
+             SLIDE 6: HOW TO START (Terminal)
              ============================================= -->
         <div class="slide" id="slide-6">
             <div class="slide-content slide-howto">
                 <h2 class="howto-title">How to start</h2>
-                <div class="howto-steps">
-                    <div class="howto-step" data-fragment="1">
-                        <span class="howto-number">1</span>
-                        <span class="howto-text">Download it</span>
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-btn terminal-btn--red"></div>
+                        <div class="terminal-btn terminal-btn--yellow"></div>
+                        <div class="terminal-btn terminal-btn--green"></div>
+                        <div class="terminal-title">Terminal</div>
                     </div>
-                    <div class="howto-step" data-fragment="2">
-                        <span class="howto-number">2</span>
-                        <span class="howto-text">Say: <code>Help me make X</code></span>
-                    </div>
-                    <div class="howto-step" data-fragment="3">
-                        <span class="howto-number">3</span>
-                        <span class="howto-text">Press enter</span>
+                    <div class="terminal-body">
+                        <div class="terminal-step" data-fragment="1">
+                            <div class="terminal-step-label">Step 1: Download</div>
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">$ </span><span class="terminal-command">curl -fsSL https://claude.ai/install.sh | bash</span>
+                            </div>
+                        </div>
+                        <div class="terminal-step" data-fragment="2">
+                            <div class="terminal-step-label">Step 2: Tell it what you want</div>
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">$ </span><span class="terminal-command">claude</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-claude">&gt; </span><span class="terminal-typing">Make me a presentation convincing people to use claude code</span>
+                            </div>
+                        </div>
+                        <div class="terminal-step" data-fragment="3">
+                            <div class="terminal-step-label">Step 3: Press enter</div>
+                            <div class="terminal-line">
+                                <span class="terminal-output">Thinking...</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-success">✓ Done. Your presentation is ready.</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
