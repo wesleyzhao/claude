@@ -25,15 +25,15 @@
             --border: #E5E5E0;
             --white: #FFFFFF;
 
-            /* Typography */
+            /* Typography - fixed sizes for consistent presentation */
             --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            --size-display: clamp(3rem, 6vw, 5rem);
-            --size-hero: clamp(2.5rem, 5vw, 4rem);
-            --size-title: clamp(1.75rem, 3.5vw, 2.75rem);
-            --size-large: clamp(1.25rem, 2.5vw, 1.75rem);
-            --size-body: clamp(1rem, 1.5vw, 1.25rem);
-            --size-small: clamp(0.875rem, 1.2vw, 1rem);
-            --size-tiny: 0.8rem;
+            --size-display: 5rem;
+            --size-hero: 4rem;
+            --size-title: 2.75rem;
+            --size-large: 1.75rem;
+            --size-body: 1.25rem;
+            --size-small: 1rem;
+            --size-tiny: 0.875rem;
             --weight-light: 300;
             --weight-normal: 400;
             --weight-medium: 500;
@@ -443,58 +443,90 @@
            ============================================ */
         .slide-why {
             text-align: center;
-            max-width: 750px;
+            max-width: 900px;
         }
 
         .why-title {
             font-size: var(--size-title);
             font-weight: var(--weight-semibold);
-            margin-bottom: var(--space-xl);
+            margin-bottom: var(--space-lg);
             letter-spacing: -0.01em;
         }
 
-        .why-main {
-            font-size: var(--size-large);
-            font-weight: var(--weight-semibold);
-            color: var(--text);
-            margin-bottom: var(--space-md);
-            line-height: var(--line-height);
-        }
-
-        .why-main em {
-            color: var(--accent);
-            font-style: normal;
-        }
-
-        .why-sub {
-            font-size: var(--size-body);
-            color: var(--subtle);
-            line-height: var(--line-height);
-            max-width: 550px;
-            margin: 0 auto;
-        }
-
-        .why-features {
+        .why-comparison {
             display: flex;
             justify-content: center;
+            align-items: stretch;
             gap: var(--space-lg);
-            margin-top: var(--space-xl);
+            margin-bottom: var(--space-lg);
         }
 
-        .why-feature {
+        .why-box {
+            flex: 1;
+            max-width: 340px;
+            padding: var(--space-lg) var(--space-md);
+            border-radius: var(--radius);
             text-align: center;
-            padding: var(--space-md);
         }
 
-        .why-feature-icon {
-            font-size: 2rem;
+        .why-box--other {
+            background: var(--border);
+            color: var(--subtle);
+        }
+
+        .why-box--claude {
+            background: var(--accent-light);
+            border: 2px solid var(--accent);
+        }
+
+        .why-box-label {
+            font-size: var(--size-small);
+            font-weight: var(--weight-semibold);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             margin-bottom: var(--space-sm);
         }
 
-        .why-feature-text {
-            font-size: var(--size-body);
+        .why-box--other .why-box-label {
+            color: var(--subtle);
+        }
+
+        .why-box--claude .why-box-label {
+            color: var(--accent);
+        }
+
+        .why-box-main {
+            font-size: var(--size-large);
+            font-weight: var(--weight-bold);
+            line-height: var(--line-height-tight);
+            margin-bottom: var(--space-sm);
+        }
+
+        .why-box--other .why-box-main {
+            color: var(--subtle);
+        }
+
+        .why-box--claude .why-box-main {
             color: var(--text);
-            font-weight: var(--weight-medium);
+        }
+
+        .why-box-sub {
+            font-size: var(--size-small);
+            line-height: var(--line-height);
+        }
+
+        .why-box--other .why-box-sub {
+            color: var(--subtle);
+        }
+
+        .why-box--claude .why-box-sub {
+            color: var(--text);
+        }
+
+        .why-bottom {
+            font-size: var(--size-body);
+            color: var(--subtle);
+            font-style: italic;
         }
 
         /* ============================================
@@ -528,7 +560,7 @@
             flex: 0 0 160px;
             display: flex;
             flex-direction: column;
-            padding-top: 52px;
+            padding-top: 72px;
         }
 
         .howto-step {
@@ -536,11 +568,6 @@
             align-items: center;
             gap: var(--space-sm);
             height: 96px;
-        }
-
-        .howto-step:last-child {
-            height: auto;
-            min-height: 96px;
         }
 
         .howto-number {
@@ -613,7 +640,7 @@
         .terminal-body {
             padding: 28px 32px;
             font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
-            font-size: clamp(16px, 1.8vw, 20px);
+            font-size: 20px;
             line-height: 1.8;
             min-height: 300px;
         }
@@ -651,7 +678,7 @@
         }
 
         .terminal-block {
-            min-height: 96px;
+            height: 96px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -730,45 +757,78 @@
         /* ============================================
            RESPONSIVE
            ============================================ */
-        @media (max-width: 768px) {
+        /* Mobile preview only - scales everything down for phone viewing */
+        @media (max-width: 480px) {
+            :root {
+                --size-display: 2.5rem;
+                --size-hero: 2rem;
+                --size-title: 1.5rem;
+                --size-large: 1.1rem;
+                --size-body: 0.9rem;
+                --size-small: 0.8rem;
+                --size-tiny: 0.7rem;
+            }
+
             .slide {
-                padding: var(--space-lg) var(--space-md);
+                padding: var(--space-md);
             }
 
             .so-easy-title {
-                top: 12%;
+                top: 10%;
             }
 
             .emerson-photos {
-                gap: var(--space-md);
+                flex-direction: column;
+                gap: var(--space-sm);
             }
 
             .emerson-photo {
-                width: 180px;
-                height: 180px;
+                width: 140px;
+                height: 140px;
             }
 
             .evidence-grid {
-                flex-wrap: wrap;
-                gap: var(--space-md);
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
             }
 
             .evidence-photo {
-                width: 90px;
-                height: 90px;
+                width: 60px;
+                height: 60px;
             }
 
             .why-comparison {
                 flex-direction: column;
-                gap: var(--space-md);
+                gap: var(--space-sm);
             }
 
-            .why-box {
-                min-width: 180px;
+            .howto-container {
+                flex-direction: column;
             }
 
             .howto-steps {
-                padding: 0 var(--space-sm);
+                flex: none;
+                padding-top: 0;
+                flex-direction: row;
+                justify-content: center;
+                gap: var(--space-md);
+                margin-bottom: var(--space-sm);
+            }
+
+            .howto-step {
+                height: auto;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .terminal-body {
+                font-size: 12px;
+                padding: 16px;
+            }
+
+            .terminal-block {
+                height: auto;
+                min-height: 50px;
             }
         }
     </style>
@@ -874,22 +934,19 @@
         <div class="slide" id="slide-5">
             <div class="slide-content slide-why">
                 <h2 class="why-title">Why Claude Code?</h2>
-                <p class="why-main"><em>Full access</em> to your computer.</p>
-                <p class="why-sub">No sandbox. No limitations. It can read your files, run commands, browse the web, and build anything you describe.</p>
-                <div class="why-features">
-                    <div class="why-feature">
-                        <div class="why-feature-icon">📁</div>
-                        <div class="why-feature-text">Your files</div>
+                <div class="why-comparison">
+                    <div class="why-box why-box--other">
+                        <div class="why-box-label">Other AI tools</div>
+                        <div class="why-box-main">Work in a sandbox</div>
+                        <div class="why-box-sub">Generic templates. Sample data. You copy &amp; paste the code.</div>
                     </div>
-                    <div class="why-feature">
-                        <div class="why-feature-icon">⚡</div>
-                        <div class="why-feature-text">Your terminal</div>
-                    </div>
-                    <div class="why-feature">
-                        <div class="why-feature-icon">🌐</div>
-                        <div class="why-feature-text">The web</div>
+                    <div class="why-box why-box--claude">
+                        <div class="why-box-label">Claude Code</div>
+                        <div class="why-box-main">Works on your computer</div>
+                        <div class="why-box-sub">Your files. Your data. It does the work.</div>
                     </div>
                 </div>
+                <p class="why-bottom">It's the difference between a demo and a real tool.</p>
             </div>
         </div>
 
