@@ -312,7 +312,7 @@
         }
 
         /* ============================================
-           SLIDE 3: EVIDENCE / WHAT PEOPLE BUILT
+           SLIDE 3: EVIDENCE / MBA STUDENTS
            ============================================ */
         .slide-evidence {
             display: flex;
@@ -324,53 +324,54 @@
         .evidence-title {
             font-size: var(--size-title);
             font-weight: var(--weight-semibold);
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-xl);
             text-align: center;
             letter-spacing: -0.01em;
         }
 
+        .evidence-title em {
+            font-style: normal;
+            color: var(--accent);
+        }
+
         .evidence-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--space-md);
-            width: 100%;
-            max-width: 720px;
-        }
-
-        .evidence-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: var(--space-md) var(--space-lg);
             display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: var(--space-md);
-            box-shadow: var(--shadow);
-            transition: box-shadow var(--transition-medium),
-                        border-color var(--transition-medium);
+            justify-content: center;
+            gap: var(--space-lg);
+            width: 100%;
+            max-width: 900px;
         }
 
-        .evidence-card.visible {
-            border-color: var(--accent-light);
-            box-shadow: var(--shadow-lg);
+        .evidence-person {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: var(--space-sm);
+            max-width: 180px;
         }
 
         .evidence-photo {
-            flex-shrink: 0;
-            width: 56px;
-            height: 56px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-light) 0%, var(--border) 100%);
+            background: linear-gradient(145deg, var(--accent-light) 0%, var(--border) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             color: var(--subtle);
-            font-size: 10px;
+            font-size: 11px;
             font-weight: var(--weight-medium);
             text-transform: uppercase;
             letter-spacing: 0.03em;
+            box-shadow: var(--shadow);
+            transition: transform var(--transition-medium),
+                        box-shadow var(--transition-medium);
+        }
+
+        .evidence-person.visible .evidence-photo {
+            box-shadow: var(--shadow-lg);
         }
 
         .evidence-photo img {
@@ -504,17 +505,12 @@
             max-width: 700px;
         }
 
-        .howto-tagline {
+        .howto-title {
             font-size: var(--size-title);
             color: var(--text);
             font-weight: var(--weight-semibold);
             letter-spacing: -0.01em;
             margin-bottom: var(--space-lg);
-        }
-
-        .howto-tagline em {
-            font-style: normal;
-            color: var(--accent);
         }
 
         .howto-steps {
@@ -655,7 +651,13 @@
             }
 
             .evidence-grid {
-                grid-template-columns: 1fr;
+                flex-wrap: wrap;
+                gap: var(--space-md);
+            }
+
+            .evidence-photo {
+                width: 90px;
+                height: 90px;
             }
 
             .why-comparison {
@@ -704,38 +706,38 @@
         </div>
 
         <!-- =============================================
-             SLIDE 3: WHAT PEOPLE BUILT
+             SLIDE 3: MBA STUDENTS
              ============================================= -->
         <div class="slide" id="slide-3">
             <div class="slide-content slide-evidence">
-                <h2 class="evidence-title">What GSB students built</h2>
+                <h2 class="evidence-title">It's so easy, an <em>MBA</em> can do it.</h2>
                 <div class="evidence-grid">
-                    <div class="evidence-card" data-fragment="1">
+                    <div class="evidence-person" data-fragment="1">
                         <div class="evidence-photo"><span>photo</span></div>
                         <div class="evidence-info">
-                            <span class="evidence-project">Mutual free time finder</span>
-                            <span class="evidence-desc">Scans calendars, finds openings</span>
+                            <span class="evidence-project">Free time finder</span>
+                            <span class="evidence-desc">Scans calendars</span>
                         </div>
                     </div>
-                    <div class="evidence-card" data-fragment="2">
+                    <div class="evidence-person" data-fragment="2">
                         <div class="evidence-photo"><span>photo</span></div>
                         <div class="evidence-info">
-                            <span class="evidence-project">Nurse triage assistant</span>
-                            <span class="evidence-desc">Helps prioritize patient intake</span>
+                            <span class="evidence-project">Nurse triage</span>
+                            <span class="evidence-desc">Patient intake</span>
                         </div>
                     </div>
-                    <div class="evidence-card" data-fragment="3">
+                    <div class="evidence-person" data-fragment="3">
                         <div class="evidence-photo"><span>photo</span></div>
                         <div class="evidence-info">
                             <span class="evidence-project">Elder companion</span>
-                            <span class="evidence-desc">Listens, talks back, keeps company</span>
+                            <span class="evidence-desc">Listens and talks</span>
                         </div>
                     </div>
-                    <div class="evidence-card" data-fragment="4">
+                    <div class="evidence-person" data-fragment="4">
                         <div class="evidence-photo"><span>photo</span></div>
                         <div class="evidence-info">
-                            <span class="evidence-project">Startup prototype</span>
-                            <span class="evidence-desc">From idea to working demo</span>
+                            <span class="evidence-project">Startup MVP</span>
+                            <span class="evidence-desc">Idea to demo</span>
                         </div>
                     </div>
                 </div>
@@ -780,7 +782,7 @@
              ============================================= -->
         <div class="slide" id="slide-6">
             <div class="slide-content slide-howto">
-                <p class="howto-tagline">It's so easy, an <em>MBA</em> can do it.</p>
+                <h2 class="howto-title">How to start</h2>
                 <div class="howto-steps">
                     <div class="howto-step" data-fragment="1">
                         <span class="howto-number">1</span>
