@@ -299,14 +299,15 @@
         }
 
         .emerson-tagline {
-            font-size: var(--size-large);
-            color: var(--subtle);
-            line-height: var(--line-height);
-            font-weight: var(--weight-normal);
+            font-size: var(--size-title);
+            color: var(--text);
+            line-height: var(--line-height-tight);
+            font-weight: var(--weight-semibold);
+            letter-spacing: -0.01em;
         }
 
         .emerson-tagline em {
-            font-style: italic;
+            font-style: normal;
             color: var(--accent);
         }
 
@@ -342,8 +343,9 @@
             border-radius: var(--radius);
             padding: var(--space-md) var(--space-lg);
             display: flex;
-            flex-direction: column;
-            gap: 4px;
+            flex-direction: row;
+            align-items: center;
+            gap: var(--space-md);
             box-shadow: var(--shadow);
             transition: box-shadow var(--transition-medium),
                         border-color var(--transition-medium);
@@ -352,6 +354,35 @@
         .evidence-card.visible {
             border-color: var(--accent-light);
             box-shadow: var(--shadow-lg);
+        }
+
+        .evidence-photo {
+            flex-shrink: 0;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--border) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: var(--subtle);
+            font-size: 10px;
+            font-weight: var(--weight-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .evidence-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .evidence-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
 
         .evidence-project {
@@ -474,16 +505,16 @@
         }
 
         .howto-tagline {
-            font-size: var(--size-large);
-            color: var(--subtle);
-            font-style: italic;
+            font-size: var(--size-title);
+            color: var(--text);
+            font-weight: var(--weight-semibold);
+            letter-spacing: -0.01em;
             margin-bottom: var(--space-lg);
         }
 
         .howto-tagline em {
             font-style: normal;
             color: var(--accent);
-            font-weight: var(--weight-semibold);
         }
 
         .howto-steps {
@@ -680,20 +711,32 @@
                 <h2 class="evidence-title">What GSB students built</h2>
                 <div class="evidence-grid">
                     <div class="evidence-card" data-fragment="1">
-                        <span class="evidence-project">Mutual free time finder</span>
-                        <span class="evidence-desc">Scans calendars, finds openings</span>
+                        <div class="evidence-photo"><span>photo</span></div>
+                        <div class="evidence-info">
+                            <span class="evidence-project">Mutual free time finder</span>
+                            <span class="evidence-desc">Scans calendars, finds openings</span>
+                        </div>
                     </div>
                     <div class="evidence-card" data-fragment="2">
-                        <span class="evidence-project">Nurse triage assistant</span>
-                        <span class="evidence-desc">Helps prioritize patient intake</span>
+                        <div class="evidence-photo"><span>photo</span></div>
+                        <div class="evidence-info">
+                            <span class="evidence-project">Nurse triage assistant</span>
+                            <span class="evidence-desc">Helps prioritize patient intake</span>
+                        </div>
                     </div>
                     <div class="evidence-card" data-fragment="3">
-                        <span class="evidence-project">Elder companion</span>
-                        <span class="evidence-desc">Listens, talks back, keeps company</span>
+                        <div class="evidence-photo"><span>photo</span></div>
+                        <div class="evidence-info">
+                            <span class="evidence-project">Elder companion</span>
+                            <span class="evidence-desc">Listens, talks back, keeps company</span>
+                        </div>
                     </div>
                     <div class="evidence-card" data-fragment="4">
-                        <span class="evidence-project">Startup prototype</span>
-                        <span class="evidence-desc">From idea to working demo</span>
+                        <div class="evidence-photo"><span>photo</span></div>
+                        <div class="evidence-info">
+                            <span class="evidence-project">Startup prototype</span>
+                            <span class="evidence-desc">From idea to working demo</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -705,9 +748,8 @@
         <div class="slide" id="slide-4">
             <div class="slide-content slide-inflection">
                 <p class="inflection-quote">
-                    The <span class="highlight">single biggest</span><br>
-                    inflection point<br>
-                    of our lifetime.
+                    This is the <span class="highlight">biggest technological revolution</span> of my life.<br>
+                    This is clearly bigger than the Internet.
                 </p>
                 <p class="inflection-attribution">— Marc Andreessen</p>
             </div>
