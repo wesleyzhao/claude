@@ -550,6 +550,19 @@
             font-weight: var(--weight-semibold);
             letter-spacing: -0.01em;
             text-align: center;
+            position: absolute;
+            bottom: 18%;
+            left: 0;
+            right: 0;
+            padding: 0 var(--space-xl);
+        }
+
+        .so-easy-title-centered[data-fragment] {
+            transform: translateY(10px);
+        }
+
+        .so-easy-title-centered[data-fragment].visible {
+            transform: translateY(0);
         }
 
         .so-easy-title-centered em {
@@ -956,6 +969,13 @@
             justify-content: center;
         }
 
+        .howto-footnote {
+            font-size: var(--size-body);
+            color: var(--subtle);
+            text-align: center;
+            margin-top: var(--space-lg);
+        }
+
         /* ============================================
            SLIDE 7: THE COUPLET
            ============================================ */
@@ -1261,6 +1281,7 @@
                         </div>
                     </div>
                 </div>
+                <p class="howto-footnote" data-fragment="4">Yes, this whole thing was made by Claude Code.</p>
             </div>
         </div>
 
