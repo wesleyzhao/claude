@@ -253,20 +253,30 @@
            ============================================ */
         .slide-emerson {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: var(--space-xl);
+            text-align: center;
         }
 
-        .photo-frame {
-            flex-shrink: 0;
+        .emerson-tagline {
+            font-size: var(--size-title);
+            color: var(--text);
+            line-height: var(--line-height-tight);
+            font-weight: var(--weight-semibold);
+            letter-spacing: -0.01em;
+            margin-bottom: var(--space-xl);
         }
 
-        .photo-placeholder {
-            width: 300px;
-            height: 300px;
-            border-radius: var(--radius-lg);
+        .emerson-tagline em {
+            font-style: normal;
+            color: var(--accent);
+        }
+
+        .emerson-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
             background: linear-gradient(145deg, var(--accent-light) 0%, var(--border) 100%);
             display: flex;
             align-items: center;
@@ -280,35 +290,17 @@
             text-transform: uppercase;
         }
 
-        .photo-placeholder img {
+        .emerson-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .emerson-text {
-            max-width: 380px;
-        }
-
         .emerson-name {
-            font-size: var(--size-hero);
-            font-weight: var(--weight-bold);
-            letter-spacing: -0.02em;
-            margin-bottom: var(--space-xs);
-            color: var(--text);
-        }
-
-        .emerson-tagline {
-            font-size: var(--size-title);
-            color: var(--text);
-            line-height: var(--line-height-tight);
+            font-size: var(--size-large);
             font-weight: var(--weight-semibold);
-            letter-spacing: -0.01em;
-        }
-
-        .emerson-tagline em {
-            font-style: normal;
-            color: var(--accent);
+            color: var(--text);
+            margin-top: var(--space-sm);
         }
 
         /* ============================================
@@ -635,19 +627,9 @@
                 padding: var(--space-lg) var(--space-md);
             }
 
-            .slide-emerson {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .emerson-text {
-                max-width: 100%;
-                text-align: center;
-            }
-
-            .photo-placeholder {
-                width: 220px;
-                height: 220px;
+            .emerson-photo {
+                width: 160px;
+                height: 160px;
             }
 
             .evidence-grid {
@@ -693,15 +675,9 @@
              ============================================= -->
         <div class="slide" id="slide-2">
             <div class="slide-content slide-emerson">
-                <div class="photo-frame">
-                    <div class="photo-placeholder">
-                        <span>photo</span>
-                    </div>
-                </div>
-                <div class="emerson-text">
-                    <h1 class="emerson-name">Emerson</h1>
-                    <p class="emerson-tagline">It's so easy,<br>an <em>Emerson</em> can do it.</p>
-                </div>
+                <h2 class="emerson-tagline">It's so easy, an <em>Emerson</em> can do it.</h2>
+                <div class="emerson-photo"><span>photo</span></div>
+                <p class="emerson-name">Emerson, age 5</p>
             </div>
         </div>
 
