@@ -453,13 +453,21 @@
         .punchline-text {
             font-size: var(--size-title);
             font-weight: var(--weight-semibold);
-            line-height: 1.6;
+            line-height: var(--line-height-tight);
             letter-spacing: -0.02em;
             color: var(--text);
+            margin-bottom: var(--space-lg);
         }
 
         .punchline-text .line {
             display: block;
+            line-height: 1.6;
+        }
+
+        .punchline-attribution {
+            font-size: var(--size-body);
+            color: transparent;
+            font-weight: var(--weight-medium);
         }
 
         /* ============================================
@@ -1007,6 +1015,7 @@
         .slide-couplet {
             text-align: right;
             max-width: 700px;
+            align-items: flex-end;
         }
 
         .couplet-text {
@@ -1160,6 +1169,7 @@
                     <span class="line">Who needs a God,</span>
                     <span class="line">when you can download Claude.</span>
                 </p>
+                <p class="punchline-attribution">&nbsp;</p>
             </div>
         </div>
 
