@@ -206,26 +206,24 @@
         }
 
         .slide-type-quote .quote {
-            font-size: var(--size-hero);
-            font-weight: var(--weight-bold);
+            font-size: var(--size-title);
+            font-weight: var(--weight-semibold);
             line-height: var(--line-height-tight);
             letter-spacing: -0.02em;
             margin-bottom: var(--space-lg);
+            color: var(--text);
         }
 
-        .slide-type-quote .quote::before { content: '"'; color: var(--accent); }
-        .slide-type-quote .quote::after { content: '"'; color: var(--accent); }
+        .slide-type-quote .quote::before { content: '"'; }
+        .slide-type-quote .quote::after { content: '"'; }
 
         .slide-type-quote .attribution {
-            font-size: var(--size-large);
-            font-weight: var(--weight-semibold);
+            font-size: var(--size-body);
+            font-weight: var(--weight-medium);
+            color: var(--subtle);
             white-space: nowrap;
         }
 
-        /* Quote color variants */
-        .slide--dark .slide-type-quote .quote { color: var(--text-light); }
-        .slide--dark .slide-type-quote .attribution { color: var(--text-light); }
-        .slide-type-quote .attribution { color: var(--subtle); }
         .slide-type-quote .quote .highlight { color: var(--accent); }
 
         /* ============================================
@@ -408,7 +406,7 @@
         }
 
         /* ============================================
-           SLIDE 1: RUDY QUOTE (Dark)
+           SLIDE 1: RUDY QUOTE
            ============================================ */
         .slide-quote {
             text-align: center;
@@ -416,29 +414,27 @@
         }
 
         .quote-text {
-            font-size: var(--size-hero);
-            font-weight: var(--weight-bold);
+            font-size: var(--size-title);
+            font-weight: var(--weight-semibold);
             line-height: var(--line-height-tight);
             letter-spacing: -0.02em;
-            color: var(--text-light);
+            color: var(--text);
             margin-bottom: var(--space-lg);
+        }
+
+        .quote-attribution {
+            font-size: var(--size-body);
+            color: var(--subtle);
+            font-weight: var(--weight-medium);
+            white-space: nowrap;
         }
 
         .quote-text::before {
             content: '"';
-            color: var(--accent);
         }
 
         .quote-text::after {
             content: '"';
-            color: var(--accent);
-        }
-
-        .quote-attribution {
-            font-size: var(--size-large);
-            color: var(--text-light);
-            font-weight: var(--weight-semibold);
-            white-space: nowrap;
         }
 
         /* ============================================
@@ -625,8 +621,8 @@
         }
 
         .inflection-quote {
-            font-size: var(--size-hero);
-            font-weight: var(--weight-bold);
+            font-size: var(--size-title);
+            font-weight: var(--weight-semibold);
             line-height: var(--line-height-tight);
             letter-spacing: -0.02em;
             color: var(--text);
@@ -635,12 +631,10 @@
 
         .inflection-quote::before {
             content: '"';
-            color: var(--accent);
         }
 
         .inflection-quote::after {
             content: '"';
-            color: var(--accent);
         }
 
         .inflection-quote .highlight {
@@ -648,9 +642,9 @@
         }
 
         .inflection-attribution {
-            font-size: var(--size-large);
+            font-size: var(--size-body);
             color: var(--subtle);
-            font-weight: var(--weight-semibold);
+            font-weight: var(--weight-medium);
             white-space: nowrap;
         }
 
@@ -981,12 +975,56 @@
            RESPONSIVE - Mobile Preview
            Shows desktop layout scaled down uniformly
            ============================================ */
-        @media (max-width: 480px) {
-            .presentation {
-                transform: scale(0.35);
-                transform-origin: top left;
-                width: 285vw;
-                height: 285vh;
+        @media (max-width: 600px) {
+            html {
+                font-size: 8px;
+            }
+
+            .slide {
+                padding: var(--space-lg);
+            }
+
+            .slide-content {
+                min-width: 0;
+                max-width: 100%;
+                transform: scale(0.85);
+            }
+
+            .slide-howto {
+                min-width: 0;
+                transform: scale(0.7);
+            }
+
+            .terminal {
+                min-width: 0;
+            }
+
+            .emerson-photos {
+                gap: var(--space-md);
+            }
+
+            .slide--rect .emerson-photo {
+                width: 200px;
+                height: 150px;
+            }
+
+            .evidence-grid {
+                max-width: 100%;
+                gap: var(--space-sm) var(--space-md);
+            }
+
+            .slide--rect .evidence-photo {
+                width: 60px;
+                height: 60px;
+            }
+
+            .why-comparison {
+                gap: var(--space-md);
+            }
+
+            .why-box {
+                max-width: 280px;
+                padding: var(--space-md) var(--space-sm);
             }
 
             /* Hide progress bar and slide number on mobile */
@@ -1001,12 +1039,12 @@
     <div class="presentation">
 
         <!-- =============================================
-             SLIDE 1: RUDY QUOTE (Dark background)
+             SLIDE 1: RUDY QUOTE
              ============================================= -->
-        <div class="slide slide--dark active" id="slide-1">
+        <div class="slide active" id="slide-1">
             <div class="slide-content slide-quote">
-                <p class="quote-text">It was like a coming to Jesus moment.</p>
-                <p class="quote-attribution">— Michael Rudy</p>
+                <p class="quote-text" data-fragment="2">It was like a coming to Jesus moment.</p>
+                <p class="quote-attribution" data-fragment="1">Michael Rudy</p>
             </div>
         </div>
 
@@ -1038,7 +1076,7 @@
                             <span class="evidence-project">Nurse triage tool</span>
                         </div>
                     </div>
-                    <div class="evidence-person" data-fragment="2">
+                    <div class="evidence-person" data-fragment="1">
                         <div class="evidence-photo"><img src="julien.jpeg" alt="Julien"></div>
                         <div class="evidence-info">
                             <span class="evidence-name">Julien</span>
@@ -1046,7 +1084,7 @@
                             <span class="evidence-project">Elder companion</span>
                         </div>
                     </div>
-                    <div class="evidence-person" data-fragment="3">
+                    <div class="evidence-person" data-fragment="2">
                         <div class="evidence-photo"><img src="yash.jpeg" alt="Yash"></div>
                         <div class="evidence-info">
                             <span class="evidence-name">Yash</span>
@@ -1054,7 +1092,7 @@
                             <span class="evidence-project">Valentine's Day game</span>
                         </div>
                     </div>
-                    <div class="evidence-person" data-fragment="4">
+                    <div class="evidence-person" data-fragment="2">
                         <div class="evidence-photo"><img src="rodrigo.jpeg" alt="Rodrigo"></div>
                         <div class="evidence-info">
                             <span class="evidence-name">Rodrigo</span>
@@ -1062,7 +1100,7 @@
                             <span class="evidence-project">Relationship coach</span>
                         </div>
                     </div>
-                    <div class="evidence-person" data-fragment="5">
+                    <div class="evidence-person" data-fragment="3">
                         <div class="evidence-photo"><img src="kathy.jpg" alt="Kathy"></div>
                         <div class="evidence-info">
                             <span class="evidence-name">Kathy</span>
@@ -1070,7 +1108,7 @@
                             <span class="evidence-project">Calendar color-coder</span>
                         </div>
                     </div>
-                    <div class="evidence-person" data-fragment="6">
+                    <div class="evidence-person" data-fragment="3">
                         <div class="evidence-photo"><img src="tyler.jpeg" alt="Tyler"></div>
                         <div class="evidence-info">
                             <span class="evidence-name">Tyler</span>
@@ -1088,7 +1126,7 @@
         <div class="slide" id="slide-4">
             <div class="slide-content slide-inflection">
                 <p class="inflection-quote">This is the <span class="highlight">biggest technological revolution</span> of my life.</p>
-                <p class="inflection-attribution">— Marc Andreessen</p>
+                <p class="inflection-attribution">Marc Andreessen, January 2026</p>
             </div>
         </div>
 
