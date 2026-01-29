@@ -448,18 +448,18 @@
 
         /* ============================================
            SLIDE 2: PUNCHLINE
+           Reuses slide-quote container for alignment
            ============================================ */
-        .slide-punchline {
-            text-align: center;
-            max-width: var(--content-max-width-narrow);
-        }
-
         .punchline-text {
             font-size: var(--size-title);
             font-weight: var(--weight-semibold);
-            line-height: var(--line-height-tight);
+            line-height: 1.6;
             letter-spacing: -0.02em;
             color: var(--text);
+        }
+
+        .punchline-text .line {
+            display: block;
         }
 
         /* ============================================
@@ -1025,6 +1025,17 @@
             color: var(--accent);
         }
 
+        .couplet-callback {
+            font-size: var(--size-body);
+            color: var(--subtle);
+            margin-top: var(--space-lg);
+            text-align: right;
+        }
+
+        .couplet-callback .line {
+            display: block;
+        }
+
         /* ============================================
            SLIDE 8: CTA
            ============================================ */
@@ -1144,8 +1155,11 @@
              SLIDE 2: PUNCHLINE
              ============================================= -->
         <div class="slide" id="slide-2">
-            <div class="slide-content slide-punchline">
-                <p class="punchline-text">Who needs a God, when you can download Claude.</p>
+            <div class="slide-content slide-quote">
+                <p class="punchline-text">
+                    <span class="line">Who needs a God,</span>
+                    <span class="line">when you can download Claude.</span>
+                </p>
             </div>
         </div>
 
@@ -1318,6 +1332,10 @@
                 <p class="couplet-text">
                     <span class="line">Leave the CS kids <span class="highlight">alone</span>.</span>
                     <span class="line">You can do it on your <span class="highlight">own</span>.</span>
+                </p>
+                <p class="couplet-callback" data-fragment="1">
+                    <span class="line">Who needs a God,</span>
+                    <span class="line">when you can download Claude.</span>
                 </p>
             </div>
         </div>
