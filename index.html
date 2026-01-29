@@ -329,9 +329,9 @@
         .evidence-grid {
             display: flex;
             justify-content: center;
-            gap: var(--space-lg);
+            gap: var(--space-md);
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
             margin-top: var(--space-lg);
         }
 
@@ -340,13 +340,14 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            gap: var(--space-sm);
-            max-width: 180px;
+            gap: 6px;
+            flex: 1;
+            max-width: 150px;
         }
 
         .evidence-photo {
-            width: 120px;
-            height: 120px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             background: linear-gradient(145deg, var(--accent-light) 0%, var(--border) 100%);
             display: flex;
@@ -354,7 +355,7 @@
             justify-content: center;
             overflow: hidden;
             color: var(--subtle);
-            font-size: 11px;
+            font-size: 9px;
             font-weight: var(--weight-medium);
             text-transform: uppercase;
             letter-spacing: 0.03em;
@@ -379,17 +380,26 @@
             gap: 2px;
         }
 
-        .evidence-project {
+        .evidence-name {
             font-size: var(--size-body);
             font-weight: var(--weight-semibold);
             color: var(--text);
-            line-height: var(--line-height-tight);
+            line-height: 1.2;
         }
 
-        .evidence-desc {
-            font-size: var(--size-small);
+        .evidence-role {
+            font-size: var(--size-tiny);
             color: var(--subtle);
-            line-height: var(--line-height);
+            font-weight: var(--weight-normal);
+            line-height: 1.3;
+        }
+
+        .evidence-project {
+            font-size: var(--size-small);
+            font-weight: var(--weight-medium);
+            color: var(--accent);
+            line-height: 1.3;
+            margin-top: 2px;
         }
 
         /* ============================================
@@ -700,31 +710,43 @@
                 <h2 class="so-easy-title">It's so easy, an <em>MBA</em> can do it.</h2>
                 <div class="evidence-grid">
                     <div class="evidence-person" data-fragment="1">
-                        <div class="evidence-photo"><span>photo</span></div>
+                        <div class="evidence-photo"><img src="rahul.jpeg" alt="Rahul"></div>
                         <div class="evidence-info">
-                            <span class="evidence-project">Free time finder</span>
-                            <span class="evidence-desc">Scans calendars</span>
+                            <span class="evidence-name">Rahul</span>
+                            <span class="evidence-role">Doctor</span>
+                            <span class="evidence-project">Nurse triage tool</span>
                         </div>
                     </div>
                     <div class="evidence-person" data-fragment="2">
-                        <div class="evidence-photo"><span>photo</span></div>
+                        <div class="evidence-photo"><img src="julien.jpeg" alt="Julien"></div>
                         <div class="evidence-info">
-                            <span class="evidence-project">Nurse triage</span>
-                            <span class="evidence-desc">Patient intake</span>
+                            <span class="evidence-name">Julien</span>
+                            <span class="evidence-role">Healthcare Strategy</span>
+                            <span class="evidence-project">Elder companion</span>
                         </div>
                     </div>
                     <div class="evidence-person" data-fragment="3">
-                        <div class="evidence-photo"><span>photo</span></div>
+                        <div class="evidence-photo"><img src="yash.jpeg" alt="Yash"></div>
                         <div class="evidence-info">
-                            <span class="evidence-project">Elder companion</span>
-                            <span class="evidence-desc">Listens and talks</span>
+                            <span class="evidence-name">Yash</span>
+                            <span class="evidence-role">PE / Consulting</span>
+                            <span class="evidence-project">Valentine's Day game</span>
                         </div>
                     </div>
                     <div class="evidence-person" data-fragment="4">
-                        <div class="evidence-photo"><span>photo</span></div>
+                        <div class="evidence-photo"><img src="rodrigo.jpeg" alt="Rodrigo"></div>
                         <div class="evidence-info">
-                            <span class="evidence-project">Startup MVP</span>
-                            <span class="evidence-desc">Idea to demo</span>
+                            <span class="evidence-name">Rodrigo</span>
+                            <span class="evidence-role">Consulting</span>
+                            <span class="evidence-project">Relationship coach</span>
+                        </div>
+                    </div>
+                    <div class="evidence-person" data-fragment="5">
+                        <div class="evidence-photo"><img src="kathy.jpg" alt="Kathy"></div>
+                        <div class="evidence-info">
+                            <span class="evidence-name">Kathy</span>
+                            <span class="evidence-role">Fulbright Scholar</span>
+                            <span class="evidence-project">Calendar color-coding</span>
                         </div>
                     </div>
                 </div>
