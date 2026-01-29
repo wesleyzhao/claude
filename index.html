@@ -327,27 +327,26 @@
         }
 
         .evidence-grid {
-            display: flex;
-            justify-content: center;
-            gap: var(--space-md);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md) var(--space-xl);
             width: 100%;
-            max-width: 1000px;
-            margin-top: var(--space-lg);
+            max-width: 600px;
+            margin-top: var(--space-md);
         }
 
         .evidence-person {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
-            text-align: center;
-            gap: 6px;
-            flex: 1;
-            max-width: 150px;
+            text-align: left;
+            gap: var(--space-md);
         }
 
         .evidence-photo {
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
             border-radius: 50%;
             background: linear-gradient(145deg, var(--accent-light) 0%, var(--border) 100%);
             display: flex;
@@ -746,7 +745,15 @@
                         <div class="evidence-info">
                             <span class="evidence-name">Kathy</span>
                             <span class="evidence-role">Fulbright Scholar</span>
-                            <span class="evidence-project">Calendar color-coding</span>
+                            <span class="evidence-project">Calendar color-coder</span>
+                        </div>
+                    </div>
+                    <div class="evidence-person" data-fragment="6">
+                        <div class="evidence-photo"><span>photo</span></div>
+                        <div class="evidence-info">
+                            <span class="evidence-name">Tyler</span>
+                            <span class="evidence-role">Investor</span>
+                            <span class="evidence-project">Meeting time finder</span>
                         </div>
                     </div>
                 </div>
