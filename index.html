@@ -273,6 +273,12 @@
             color: var(--accent);
         }
 
+        .emerson-photos {
+            display: flex;
+            gap: var(--space-lg);
+            justify-content: center;
+        }
+
         .emerson-photo {
             width: 200px;
             height: 200px;
@@ -627,9 +633,13 @@
                 padding: var(--space-lg) var(--space-md);
             }
 
+            .emerson-photos {
+                gap: var(--space-md);
+            }
+
             .emerson-photo {
-                width: 160px;
-                height: 160px;
+                width: 140px;
+                height: 140px;
             }
 
             .evidence-grid {
@@ -676,7 +686,10 @@
         <div class="slide" id="slide-2">
             <div class="slide-content slide-emerson">
                 <h2 class="emerson-tagline">It's so easy, an <em>Emerson</em> can do it.</h2>
-                <div class="emerson-photo"><span>photo</span></div>
+                <div class="emerson-photos">
+                    <div class="emerson-photo"><img src="emerson-dimsum.jpg" alt="Emerson"></div>
+                    <div class="emerson-photo"><img src="emerson-gaming.jpg" alt="Emerson gaming"></div>
+                </div>
                 <p class="emerson-name">Emerson, age 5</p>
             </div>
         </div>
