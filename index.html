@@ -1245,7 +1245,7 @@
            ============================================ */
         .slide-quickstart {
             justify-content: flex-start !important;
-            padding-top: 8vh;
+            padding-top: 4vh;
         }
 
         .slide-quickstart .qs-title {
@@ -1319,7 +1319,7 @@
 
         /* Terminal for quickstart */
         .qs-terminal {
-            flex: 0 0 550px;
+            flex: 0 0 600px;
             background: #1a1a2e;
             border-radius: var(--radius);
             overflow: hidden;
@@ -1360,7 +1360,13 @@
 
         .qs-terminal .terminal-line {
             margin-bottom: 3px;
-            white-space: nowrap;
+        }
+
+        .qs-terminal .copy-line {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: nowrap;
         }
 
         .qs-terminal .terminal-prompt { color: #7ee787; }
@@ -1380,22 +1386,17 @@
         }
 
         /* Copy button in terminal */
-        .qs-terminal .copy-line {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
         .qs-terminal .copy-btn {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.15);
-            color: #888;
-            padding: 2px 8px;
-            border-radius: 3px;
-            font-size: 10px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #aaa;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 11px;
             font-family: var(--font);
             cursor: pointer;
             transition: all var(--transition-fast);
+            flex-shrink: 0;
         }
 
         .qs-terminal .copy-btn:hover {
@@ -2141,9 +2142,9 @@
             if (hint) {
                 var hints = [
                     'Open Terminal on your Mac, paste the command below, and press Enter.',
-                    'Read the output carefully. Copy and paste the PATH command it shows into your Terminal, and press Enter. It will look something like what it shows below.',
-                    'Type "claude", hit Enter, and select Claude.ai to sign in.',
-                    'Describe what you want to build and press Enter. Feel free to copy the beginning of the prompt below if you\'d like.'
+                    'Read the output carefully. You\'ll likely be asked to copy and paste a PATH command into your Terminal. If so, paste it and press Enter. It may look something like what it shows below.',
+                    'Type "claude", hit Enter, and finish signing in.',
+                    'Describe what you want to build and press Enter. Feel free to copy the beginning of the prompt below.'
                 ];
                 var hintIndex = 0;
                 if (currentStep === 1 && hasOutput) hintIndex = 1;
