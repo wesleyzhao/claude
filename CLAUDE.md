@@ -1,7 +1,13 @@
-# Claude Code Presentation
+# Claude Code Quickstart Guide
 
 ## Project Purpose
-A single-page HTML presentation for Wesley's GSB class talk convincing MBA students to spend one hour building something with Claude Code. Designed for fullscreen presentation mode with keyboard/clicker navigation.
+A self-serve quickstart guide for setting up Claude Code, plus the original GSB presentation slides. Lives at `wesleyzhao.com/claude`. Designed for users to follow along on their own devices.
+
+## Branch Strategy
+This is the `quickstart` branch, maintained in a separate git worktree:
+- **Main branch (`main`)**: Original presentation slides only
+- **Quickstart branch (`quickstart`)**: Quickstart flow + presentation slides
+- To pull in presentation updates: `git merge origin/main`
 
 ## Tech Stack
 - Single `index.html` file (no build tools, no frameworks)
@@ -9,19 +15,32 @@ A single-page HTML presentation for Wesley's GSB class talk convincing MBA stude
 - Inline CSS + JavaScript
 - Deployable to GitHub Pages
 
-## Live URL
-https://wesleyzhao.github.io/class-presentation/
+## Slide Structure (15 slides total)
 
-## Presentation Structure (8 slides)
+### Quickstart Slides (1-5)
+1. **Entry Point** - "Start making something with Claude Code" + two paths (Quickstart / Book time)
+2. **Step 1: Install** - Terminal with `curl` install command + copy button
+3. **Step 2: Verify** - Type `claude` + PATH troubleshooting callout
+4. **Step 3: Login** - Authentication prompt visualization
+5. **Step 4: Build** - "Enter planning mode..." prompt + project ideas
 
-1. **Rudy Quote** (dark background) - "It was like a coming to Jesus moment." — Michael Rudy
-2. **Emerson** - "It's so easy, an Emerson can do it." + two photos of Emerson (age 5)
-3. **MBA Students** - "It's so easy, an MBA can do it." + 6 GSB classmates with photos showing what they built
-4. **Andreessen Quote** - "This is the biggest technological revolution of my life." — Marc Andreessen
-5. **Why Claude Code** - "Full access to your computer" + 3 feature icons
-6. **How to Start** - Terminal simulation with 3 steps (download, ask, enter)
-7. **The Couplet** - "Leave the CS kids alone. You can do it on your own."
-8. **CTA** - "Make something with Claude Code." + QR placeholder
+### Presentation Slides (6-15)
+6. **Rudy Quote** - "It was like a coming to Jesus moment."
+7. **Punchline** - "Who needs a God, when you can download Claude."
+8. **Emerson** - Photos + "So easy, an Emerson can do it."
+9. **MBA Students** - Grid of 6 GSB classmates with projects
+10. **Andreessen Quote** - "Biggest technological revolution of my life."
+11. **Camus Quote** - "I rebel—therefore we exist."
+12. **GSB Motto** - "Change lives. Change organizations. Change the world."
+13. **How to Start** - Terminal demo with 3 steps
+14. **The Couplet** - "Leave the CS kids alone..."
+15. **CTA** - "Make something with Claude Code." + QR code
+
+## URL Parameters
+- `?presentation` - Jump directly to presentation (skips quickstart)
+- `?slide=N` - Jump to slide N (1-indexed)
+- `?debug=1` - Show layout outlines
+- Combined: `?presentation&debug=1`
 
 ## Navigation Controls
 - **Next:** Right arrow, Down arrow, Space, Enter, PageDown
@@ -32,89 +51,92 @@ https://wesleyzhao.github.io/class-presentation/
 - **First slide:** Home key
 - **Last slide:** End key
 - **Touch:** Swipe left/right
+- **Entry cards:** Click to navigate
 
-## Testing & Debug Features
-- **Jump to slide:** Add `?slide=N` to URL (e.g., `index.html?slide=6`)
-- **Debug mode:** Add `?debug=1` to URL to show layout outlines
-- **Combined:** `index.html?slide=3&debug=1`
+## Key Features
 
-## Fragment Animations
-Some slides have click-to-reveal fragments:
-- Slide 3: Each MBA student reveals one at a time (6 fragments)
-- Slide 6: Each terminal step reveals with corresponding left-side step label (3 fragments)
+### Copy-to-Clipboard Buttons
+Commands can be copied with one click:
+- Install command: `curl -fsSL https://claude.ai/install.sh | bash`
+- PATH fix: `export PATH="$HOME/.local/bin:$PATH"`
+
+### Callout Boxes
+- **Warning (yellow)**: For troubleshooting tips (e.g., PATH issues)
+- **Idea (purple)**: For suggestions and examples
+
+### Entry Point Cards
+Two clickable cards on the first slide:
+1. **Quickstart** - Advances to Step 1
+2. **Book time with me** - Opens Calendly in new tab
 
 ## Design System
 - **Background:** #FAFAF8 (warm off-white)
 - **Text:** #1B1B1B (dark charcoal)
 - **Accent:** #D4725C (coral, Anthropic-inspired)
+- **Warning:** #FEF9E7 bg, #F4D03F border
+- **Idea:** #EDE7F6 bg, #7E57C2 border
 - **Font:** Inter (Google Fonts)
-- **Dark slide variant:** #1B1B1B background for Rudy quote
 
-## Key Files
-- `index.html` - The entire presentation
-- `backup-old-howto-slide.html` - Backup of pre-terminal "How to Start" slide design
-- `CLAUDE.md` - This file
+## Adding New Steps
 
-## Image Assets
-- `emerson-dimsum.jpg` - Emerson photo (left)
-- `emerson-gaming.jpg` - Emerson photo (right)
-- `rahul.jpeg` - Rahul (Doctor, Nurse triage tool)
-- `julien.jpeg` - Julien (Healthcare Strategy, Elder companion)
-- `yash.jpeg` - Yash (PE/Consulting, Valentine's Day game)
-- `rodrigo.jpeg` - Rodrigo (Consulting, Relationship coach)
-- `kathy.jpg` - Kathy (Fulbright Scholar, Calendar color-coder)
-- `tyler.jpeg` - Tyler (Investor, Meeting time finder)
+To add a new step (e.g., Step 5), use this template:
 
-## CSS Architecture
-
-### Layout Tokens (CSS Variables)
-All sizing is controlled via CSS variables in `:root`:
-- **Content:** `--content-max-width`, `--content-min-width`
-- **Photos:** `--photo-large-w`, `--photo-large-h`, `--photo-small`
-- **Terminal:** `--terminal-min-width`, `--terminal-row-height`, `--terminal-font-size`
-- **Spacing:** `--space-xs` through `--space-2xl`
-
-### Slide Type Classes
-Reusable base classes for common patterns:
-- `.slide-type-quote` - Centered quote with attribution
-- `.slide-type-photos` - Title at top, photo grid below
-- `.slide-type-comparison` - Two boxes side by side
-- `.slide-type-terminal` - Left steps + right terminal
-- `.slide-type-text` - Centered text, flexible
-
-## Common Modifications
-
-### Adding/changing a slide
-Edit the HTML in `index.html`. Each slide is a `<div class="slide">` with corresponding CSS. Consider using a slide type class for common patterns.
-
-### Changing MBA students
-Update slide 3's `.evidence-grid` HTML. Each person is an `.evidence-person` div with photo, name, role, and project.
-
-### Adjusting fonts/colors
-Modify the CSS custom properties in `:root` at the top of the `<style>` block.
-
-### Adjusting sizes
-Modify the layout tokens in `:root` (e.g., `--photo-large-w: 380px`).
-
-### Progress bar
-Automatically calculated based on current slide / total slides. Coral colored at bottom of viewport.
-
-## Git History Checkpoints
-- `8929236` - Before terminal slide redesign (simple numbered steps)
-- `4d71614` - Backup saved to backup-old-howto-slide.html
-
-## Deployment
-Push to `main` branch. GitHub Pages auto-deploys from root.
-
-```bash
-git add . && git commit -m "message" && git push
+```html
+<!-- QUICKSTART SLIDE N: STEP X - [TITLE] -->
+<div class="slide" id="qs-stepX">
+    <div class="slide-content slide-howto">
+        <h2 class="howto-title">Step X: [Title]</h2>
+        <div class="howto-container">
+            <div class="howto-instructions">
+                <p class="setup-instruction">[Main instruction]</p>
+            </div>
+            <div class="terminal terminal--compact">
+                <!-- Terminal content -->
+            </div>
+        </div>
+        <!-- Optional: callout-warning or callout-idea -->
+        <p class="howto-footnote">
+            <span class="nav-hint">[Navigation hint]</span>
+        </p>
+    </div>
+</div>
 ```
+
+Then update `QUICKSTART_SLIDES` constant in JavaScript.
+
+## Files
+- `index.html` - The entire presentation
+- `CLAUDE.md` - This file
+- `plan.md` - Implementation plan (in main repo)
+- Image assets for presentation slides
+
+## External Links
+- **Calendly:** https://calendly.com/weszhao-stanford/30min?month=2026-01
+- **Official docs:** https://code.claude.com/docs
+- **Install script:** https://claude.ai/install.sh
 
 ## Testing
 Open `index.html` directly in Chrome. No server needed.
 
 ### Quick testing tips
-- **Test specific slide:** `index.html?slide=6` jumps directly to slide 6
-- **Debug layout:** `index.html?debug=1` shows layout outlines
-- **Mobile preview:** Resize browser to 480px wide or use Chrome DevTools mobile emulation
-- **Keyboard shortcut:** Press G to jump to any slide by number
+- **Test entry point:** `index.html` (default)
+- **Test quickstart step 2:** `index.html?slide=3`
+- **Test presentation only:** `index.html?presentation`
+- **Debug layout:** `index.html?debug=1`
+- **Mobile preview:** Resize browser or use DevTools
+
+## Deployment
+```bash
+cd /Users/wesley/projects/claude-quickstart
+git add . && git commit -m "message" && git push -u origin quickstart
+```
+
+## Merging Main Branch Updates
+```bash
+cd /Users/wesley/projects/claude-quickstart
+git fetch origin main
+git merge origin/main
+# Resolve any conflicts in index.html
+git commit
+git push
+```
