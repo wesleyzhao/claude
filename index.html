@@ -1241,15 +1241,24 @@
         }
 
         /* ============================================
-           QUICKSTART: STEP INSTRUCTIONS
+           QUICKSTART: CONSISTENT STEP LAYOUT
            ============================================ */
+        .slide-howto {
+            justify-content: flex-start;
+            padding-top: 8vh;
+        }
+
+        .slide-howto .howto-title {
+            margin-bottom: var(--space-lg);
+        }
+
         .slide-howto .howto-container {
             align-items: flex-start;
             justify-content: center;
         }
 
         .howto-instructions {
-            flex: 0 0 280px;
+            flex: 0 0 260px;
             text-align: left;
         }
 
@@ -1437,6 +1446,12 @@
             50% { opacity: 0; }
         }
 
+        /* Path example - slightly faded to show it's approximate */
+        .terminal-path-example {
+            opacity: 0.7;
+            font-style: italic;
+        }
+
         /* ============================================
            QUICKSTART: SMALLER TERMINAL VARIANT
            ============================================ */
@@ -1579,7 +1594,7 @@
                             <li>Open <strong>Terminal</strong>
                                 <span class="setup-hint">Cmd+Space → "Terminal"</span>
                             </li>
-                            <li>Copy-paste this command:</li>
+                            <li>Copy-paste this command and hit Enter</li>
                         </ol>
                     </div>
                     <div class="terminal terminal--compact">
@@ -1595,21 +1610,16 @@
                                 <button class="copy-btn" onclick="copyCmd('install-cmd', this)">Copy</button>
                             </div>
                             <div class="terminal-line terminal-output" data-fragment="1">Setting up Claude Code...</div>
-                            <div class="terminal-line terminal-output" data-fragment="1">Downloading claude-code-macos-arm64...</div>
                             <div class="terminal-line terminal-success" data-fragment="1">✅ Installation complete!</div>
                             <div class="terminal-line" data-fragment="1"></div>
-                            <div class="terminal-line terminal-output" data-fragment="1">To use claude, add this to your shell profile:</div>
-                            <div class="terminal-line terminal-line-with-copy" data-fragment="1">
-                                <code class="terminal-command" id="path-cmd">export PATH="$HOME/.local/bin:$PATH"</code>
-                                <button class="copy-btn" onclick="copyCmd('path-cmd', this)">Copy</button>
-                            </div>
+                            <div class="terminal-line terminal-output" data-fragment="1">Run this to add claude to your path:</div>
+                            <div class="terminal-line terminal-output terminal-path-example" data-fragment="1">  export PATH="..."</div>
                         </div>
                     </div>
                 </div>
-                <div class="howto-footnote-split">
-                    <a href="https://code.claude.com/docs" target="_blank">Official docs →</a>
-                    <span class="nav-hint">Copy the PATH line above, paste it, and hit Enter</span>
-                </div>
+                <p class="howto-footnote" data-fragment="1">
+                    <span class="nav-hint">Copy whatever PATH command it shows you, paste it, hit Enter</span>
+                </p>
             </div>
         </div>
 
@@ -1623,8 +1633,8 @@
                     <div class="howto-instructions">
                         <ol class="setup-steps">
                             <li>Type <code>claude</code> and hit Enter</li>
-                            <li>Select <strong>Claude.ai</strong> to authenticate</li>
-                            <li>Sign in via browser, then return</li>
+                            <li>Select <strong>Claude.ai</strong></li>
+                            <li>Sign in via browser</li>
                         </ol>
                     </div>
                     <div class="terminal terminal--compact">
@@ -1635,23 +1645,22 @@
                             <div class="terminal-title">Terminal</div>
                         </div>
                         <div class="terminal-body">
+                            <div class="terminal-line terminal-output">...</div>
+                            <div class="terminal-line terminal-success">✅ Installation complete!</div>
+                            <div class="terminal-line"></div>
                             <div class="terminal-line">
                                 <span class="terminal-prompt">$ </span><span class="terminal-command">claude</span>
                             </div>
                             <div class="terminal-line terminal-output">Welcome to Claude Code!</div>
                             <div class="terminal-line"></div>
                             <div class="terminal-line terminal-output">? How would you like to authenticate?</div>
-                            <div class="terminal-line terminal-claude">❯ Claude.ai (Personal account)</div>
-                            <div class="terminal-line terminal-output">  Anthropic API (API key)</div>
+                            <div class="terminal-line terminal-claude">❯ Claude.ai</div>
+                            <div class="terminal-line terminal-output">  Anthropic API</div>
                         </div>
                     </div>
                 </div>
-                <div class="callout-warning" data-fragment="1">
-                    <strong>"command not found: claude"?</strong>
-                    <p>You need to run the PATH command from Step 1, then restart Terminal.</p>
-                </div>
                 <p class="howto-footnote">
-                    <span class="nav-hint">Click next after you've signed in</span>
+                    <span class="nav-hint">A browser will open. Sign in, then return here.</span>
                 </p>
             </div>
         </div>
@@ -1664,7 +1673,7 @@
                 <h2 class="howto-title">Step 3: Describe what you want to build</h2>
                 <div class="howto-container">
                     <div class="howto-instructions">
-                        <p class="setup-instruction">Type your project idea in as much detail as you have</p>
+                        <p class="setup-instruction">Type your idea with as much detail as you have</p>
                     </div>
                     <div class="terminal terminal--compact">
                         <div class="terminal-header">
@@ -1674,6 +1683,9 @@
                             <div class="terminal-title">Terminal</div>
                         </div>
                         <div class="terminal-body">
+                            <div class="terminal-line terminal-output">...</div>
+                            <div class="terminal-line terminal-success">✓ Signed in as wesley@example.com</div>
+                            <div class="terminal-line"></div>
                             <div class="terminal-line">
                                 <span class="terminal-claude">&gt; </span><span class="terminal-typing">Enter planning mode: Generate a product</span>
                             </div>
@@ -1694,9 +1706,6 @@
                         <li>"A website for my small business"</li>
                     </ul>
                 </div>
-                <p class="howto-footnote">
-                    <span class="nav-hint">The more detail you provide, the better Claude can help.</span>
-                </p>
             </div>
         </div>
 
