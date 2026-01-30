@@ -1369,6 +1369,10 @@
         .qs-terminal .terminal-success { color: #7ee787; }
         .qs-terminal .terminal-claude { color: var(--accent); }
         .qs-terminal .terminal-typing { color: #f0f0f0; }
+        .qs-terminal .terminal-warning {
+            color: #febc2e;
+            font-style: italic;
+        }
 
         .qs-terminal .terminal-cursor {
             color: #7ee787;
@@ -1746,7 +1750,7 @@
                             <div class="qs-block" data-fragment="1" data-step="1">
                                 <div class="terminal-line terminal-output">Setting up Claude Code...</div>
                                 <div class="terminal-line terminal-success">✅ Installation complete!</div>
-                                <div class="terminal-line terminal-output" style="opacity:0.6; font-style:italic">  (copy the PATH command it shows, paste & enter)</div>
+                                <div class="terminal-line terminal-warning">⚠ Copy the PATH command it shows, paste & enter</div>
                             </div>
 
                             <!-- Step 2: Login -->
