@@ -1469,20 +1469,95 @@
            QUICKSTART: MOBILE
            ============================================ */
         @media (max-width: 800px) {
+            .slide-quickstart {
+                padding-top: 1vh;
+                padding-left: var(--space-sm);
+                padding-right: var(--space-sm);
+            }
+
+            .slide-quickstart .qs-title {
+                font-size: var(--size-body);
+            }
+
+            .qs-hint {
+                font-size: var(--size-small);
+                min-height: auto;
+                padding: 0 var(--space-sm);
+            }
+
             .qs-main {
                 flex-direction: column;
                 align-items: center;
+                gap: var(--space-md);
+                width: 100%;
             }
+
             .qs-steps {
                 flex: none;
                 display: flex;
-                gap: var(--space-lg);
-                margin-bottom: var(--space-md);
+                flex-direction: row;
+                justify-content: center;
+                gap: var(--space-md);
+                margin-bottom: 0;
+                width: 100%;
             }
+
+            .qs-step {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                margin-bottom: 0;
+            }
+
+            .qs-step-text {
+                font-size: var(--size-small);
+            }
+
             .qs-terminal {
                 flex: none;
                 width: 100%;
-                max-width: 500px;
+                max-width: 100%;
+            }
+
+            .qs-terminal .terminal-body {
+                padding: 12px 10px;
+                font-size: 11px;
+                min-height: auto;
+                overflow-x: auto;
+            }
+
+            .qs-terminal .terminal-line {
+                white-space: nowrap;
+            }
+
+            .qs-terminal .copy-line {
+                gap: 8px;
+            }
+
+            .qs-terminal .copy-btn {
+                padding: 2px 6px;
+                font-size: 9px;
+            }
+
+            .qs-footer {
+                margin-top: var(--space-sm);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .qs-terminal .terminal-body {
+                font-size: 10px;
+                padding: 10px 8px;
+            }
+
+            .qs-step-num {
+                width: 24px;
+                height: 24px;
+                font-size: var(--size-tiny);
+            }
+
+            .qs-step-text {
+                font-size: var(--size-tiny);
             }
         }
 
