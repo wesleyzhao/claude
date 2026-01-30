@@ -1422,9 +1422,19 @@
             max-height: 200px;
         }
 
+        /* Dynamic hint below terminal */
+        .qs-hint {
+            margin-top: var(--space-lg);
+            font-size: var(--size-body);
+            color: var(--text);
+            font-weight: var(--weight-medium);
+            text-align: center;
+            transition: opacity var(--transition-medium);
+        }
+
         /* Footer hint */
         .qs-footer {
-            margin-top: var(--space-xl);
+            margin-top: var(--space-md);
             font-size: var(--size-small);
             color: var(--subtle);
         }
@@ -1741,21 +1751,25 @@
                             <div class="terminal-title">Terminal</div>
                         </div>
                         <div class="terminal-body">
-                            <!-- Step 1: Install (always visible) -->
+                            <!-- Step 1: Install command (always visible) -->
                             <div class="terminal-line copy-line">
                                 <span><span class="terminal-prompt">$ </span><span class="terminal-command" id="install-cmd">curl -fsSL https://claude.ai/install.sh | bash</span></span>
                                 <button class="copy-btn" onclick="copyCmd('install-cmd', this)">Copy</button>
                             </div>
-                            <div class="terminal-line terminal-output">Installing Claude Code...</div>
-                            <div class="terminal-line terminal-success">✅ Installed!</div>
-                            <div class="terminal-line terminal-warning">⚠ Run the command it shows:</div>
-                            <div class="terminal-line copy-line" style="margin-left: 16px;">
-                                <span><span class="terminal-output" id="path-cmd">export PATH="$HOME/.claude/bin:$PATH"</span></span>
-                                <button class="copy-btn" onclick="copyCmd('path-cmd', this)">Copy</button>
+
+                            <!-- Step 1 continued: Install output (fragment 1, still step 1) -->
+                            <div class="qs-block" data-fragment="1" data-step="1">
+                                <div class="terminal-line terminal-output">Installing Claude Code...</div>
+                                <div class="terminal-line terminal-success">✅ Installed!</div>
+                                <div class="terminal-line terminal-warning">⚠ Run the command it shows:</div>
+                                <div class="terminal-line copy-line" style="margin-left: 16px;">
+                                    <span><span class="terminal-output" id="path-cmd">export PATH="$HOME/.claude/bin:$PATH"</span></span>
+                                    <button class="copy-btn" onclick="copyCmd('path-cmd', this)">Copy</button>
+                                </div>
                             </div>
 
                             <!-- Step 2: Login -->
-                            <div class="qs-block" data-fragment="1">
+                            <div class="qs-block" data-fragment="2" data-step="2">
                                 <div class="terminal-line"></div>
                                 <div class="terminal-line">
                                     <span class="terminal-prompt">$ </span><span class="terminal-command">claude</span>
@@ -1766,7 +1780,7 @@
                             </div>
 
                             <!-- Step 3: Build -->
-                            <div class="qs-block" data-fragment="2">
+                            <div class="qs-block" data-fragment="3" data-step="3">
                                 <div class="terminal-line"></div>
                                 <div class="terminal-line terminal-success">✓ Signed in</div>
                                 <div class="terminal-line"></div>
@@ -1781,6 +1795,7 @@
                     </div>
                 </div>
 
+                <p class="qs-hint" id="qs-hint">Open Terminal on your Mac and paste the command above</p>
                 <p class="qs-footer"><a href="https://code.claude.com/docs" target="_blank">Official docs →</a></p>
             </div>
         </div>
@@ -2099,17 +2114,43 @@
             var stepEls = slideEl.querySelectorAll('.qs-step');
             if (stepEls.length === 0) return;
 
-            // Find which step we're on based on visible fragments
+            // Find the highest data-step among visible blocks
             var visibleBlocks = slideEl.querySelectorAll('.qs-block.visible');
-            var currentStep = visibleBlocks.length;
+            var currentStep = 1; // Default to step 1 (install command always visible)
+            var hasOutput = false; // Track if install output is visible
 
+            for (var i = 0; i < visibleBlocks.length; i++) {
+                var stepNum = parseInt(visibleBlocks[i].dataset.step) || 1;
+                if (stepNum === 1) hasOutput = true;
+                if (stepNum > currentStep) {
+                    currentStep = stepNum;
+                }
+            }
+
+            // Highlight steps up to currentStep (1-indexed, so step 1 = index 0)
             stepEls.forEach(function(step, index) {
-                if (index <= currentStep) {
+                if (index < currentStep) {
                     step.classList.add('active');
                 } else {
                     step.classList.remove('active');
                 }
             });
+
+            // Update the hint text
+            var hint = document.getElementById('qs-hint');
+            if (hint) {
+                var hints = [
+                    'Open Terminal on your Mac and paste the command above',
+                    'Copy and run the PATH command shown, then continue',
+                    'Type "claude" and select Claude.ai to sign in',
+                    'Describe what you want to build and press Enter!'
+                ];
+                var hintIndex = 0;
+                if (currentStep === 1 && hasOutput) hintIndex = 1;
+                else if (currentStep === 2) hintIndex = 2;
+                else if (currentStep === 3) hintIndex = 3;
+                hint.textContent = hints[hintIndex];
+            }
         }
 
         function resetFragments(slideEl) {
