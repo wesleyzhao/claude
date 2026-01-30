@@ -1245,11 +1245,16 @@
            ============================================ */
         .slide-howto {
             justify-content: flex-start;
-            padding-top: 8vh;
+            padding-top: 12vh;
+        }
+
+        .slide-howto .slide-content {
+            align-items: center;
         }
 
         .slide-howto .howto-title {
             margin-bottom: var(--space-lg);
+            text-align: center;
         }
 
         .slide-howto .howto-container {
@@ -1260,6 +1265,32 @@
         .howto-instructions {
             flex: 0 0 260px;
             text-align: left;
+        }
+
+        /* Ensure fragments in terminal are hidden until revealed */
+        .terminal-line[data-fragment] {
+            opacity: 0;
+            transform: none;
+            height: 0;
+            margin: 0;
+            overflow: hidden;
+            transition: opacity var(--transition-medium), height var(--transition-medium);
+        }
+
+        .terminal-line[data-fragment].visible {
+            opacity: 1;
+            height: auto;
+            margin-bottom: 2px;
+        }
+
+        .howto-footnote[data-fragment] {
+            opacity: 0;
+            transform: translateY(5px);
+        }
+
+        .howto-footnote[data-fragment].visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .setup-steps {
