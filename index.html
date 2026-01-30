@@ -1241,56 +1241,205 @@
         }
 
         /* ============================================
-           QUICKSTART: CONSISTENT STEP LAYOUT
+           QUICKSTART: UNIFIED STEP SLIDE
            ============================================ */
-        .slide-howto {
-            justify-content: flex-start;
-            padding-top: 12vh;
-        }
-
-        .slide-howto .slide-content {
+        .slide-quickstart {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-        }
-
-        .slide-howto .howto-title {
-            margin-bottom: var(--space-lg);
             text-align: center;
         }
 
-        .slide-howto .howto-container {
-            align-items: flex-start;
-            justify-content: center;
+        .slide-quickstart .qs-title {
+            position: absolute;
+            top: 10vh;
+            left: 0;
+            right: 0;
+            font-size: var(--size-title);
+            font-weight: var(--weight-semibold);
+            color: var(--text);
+            letter-spacing: -0.01em;
         }
 
-        .howto-instructions {
-            flex: 0 0 260px;
+        .qs-main {
+            display: flex;
+            gap: var(--space-xl);
+            align-items: flex-start;
+            margin-top: 8vh;
+        }
+
+        .qs-steps {
+            flex: 0 0 200px;
             text-align: left;
         }
 
-        /* Ensure fragments in terminal are hidden until revealed */
-        .terminal-line[data-fragment] {
-            opacity: 0;
-            transform: none;
-            height: 0;
-            margin: 0;
+        .qs-step {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+            opacity: 0.4;
+            transition: opacity var(--transition-medium);
+        }
+
+        .qs-step.active {
+            opacity: 1;
+        }
+
+        .qs-step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--border);
+            color: var(--subtle);
+            font-size: var(--size-small);
+            font-weight: var(--weight-bold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all var(--transition-medium);
+        }
+
+        .qs-step.active .qs-step-num {
+            background: var(--accent);
+            color: white;
+        }
+
+        .qs-step-text {
+            font-size: var(--size-body);
+            font-weight: var(--weight-medium);
+            color: var(--text);
+            line-height: 1.4;
+            padding-top: 3px;
+        }
+
+        .qs-step-hint {
+            display: block;
+            font-size: var(--size-small);
+            font-weight: var(--weight-normal);
+            color: var(--subtle);
+            margin-top: 2px;
+        }
+
+        /* Terminal for quickstart */
+        .qs-terminal {
+            flex: 0 0 550px;
+            background: #1a1a2e;
+            border-radius: var(--radius);
             overflow: hidden;
-            transition: opacity var(--transition-medium), height var(--transition-medium);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+            text-align: left;
         }
 
-        .terminal-line[data-fragment].visible {
-            opacity: 1;
-            height: auto;
-            margin-bottom: 2px;
+        .qs-terminal .terminal-header {
+            background: #2d2d3a;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .howto-footnote[data-fragment] {
+        .qs-terminal .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .qs-terminal .terminal-title {
+            flex: 1;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            font-family: 'SF Mono', Monaco, monospace;
+            margin-right: 44px;
+        }
+
+        .qs-terminal .terminal-body {
+            padding: 20px 24px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 14px;
+            line-height: 1.7;
+            min-height: 280px;
+        }
+
+        .qs-terminal .terminal-line {
+            margin-bottom: 3px;
+            white-space: nowrap;
+        }
+
+        .qs-terminal .terminal-prompt { color: #7ee787; }
+        .qs-terminal .terminal-command { color: #f0f0f0; }
+        .qs-terminal .terminal-output { color: #8b949e; }
+        .qs-terminal .terminal-success { color: #7ee787; }
+        .qs-terminal .terminal-claude { color: var(--accent); }
+        .qs-terminal .terminal-typing { color: #f0f0f0; }
+
+        .qs-terminal .terminal-cursor {
+            color: #7ee787;
+            animation: blink 1s step-end infinite;
+        }
+
+        /* Copy button in terminal */
+        .qs-terminal .copy-line {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .qs-terminal .copy-btn {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #888;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-family: var(--font);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .qs-terminal .copy-btn:hover {
+            background: rgba(255,255,255,0.15);
+            color: #ccc;
+        }
+
+        .qs-terminal .copy-btn.copied {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        /* Fragment blocks in terminal */
+        .qs-block {
             opacity: 0;
-            transform: translateY(5px);
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.3s ease, max-height 0.3s ease;
         }
 
-        .howto-footnote[data-fragment].visible {
+        .qs-block.visible {
             opacity: 1;
-            transform: translateY(0);
+            max-height: 200px;
+        }
+
+        /* Footer hint */
+        .qs-footer {
+            position: absolute;
+            bottom: 8vh;
+            left: 0;
+            right: 0;
+            font-size: var(--size-small);
+            color: var(--subtle);
+        }
+
+        .qs-footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .qs-footer a:hover {
+            text-decoration: underline;
         }
 
         .setup-steps {
@@ -1614,21 +1763,29 @@
         </div>
 
         <!-- =============================================
-             QUICKSTART SLIDE 2: STEP 1 - INSTALL
+             QUICKSTART SLIDE 2: ALL STEPS IN ONE
              ============================================= -->
-        <div class="slide" id="qs-step1">
-            <div class="slide-content slide-howto">
-                <h2 class="howto-title">Step 1: Install Claude Code</h2>
-                <div class="howto-container">
-                    <div class="howto-instructions">
-                        <ol class="setup-steps">
-                            <li>Open <strong>Terminal</strong>
-                                <span class="setup-hint">Cmd+Space → "Terminal"</span>
-                            </li>
-                            <li>Copy-paste this command and hit Enter</li>
-                        </ol>
+        <div class="slide" id="qs-steps">
+            <div class="slide-content slide-quickstart">
+                <h2 class="qs-title">Get Started with Claude Code</h2>
+
+                <div class="qs-main">
+                    <div class="qs-steps">
+                        <div class="qs-step active" id="step1">
+                            <span class="qs-step-num">1</span>
+                            <span class="qs-step-text">Install<span class="qs-step-hint">Open Terminal, paste command</span></span>
+                        </div>
+                        <div class="qs-step" id="step2">
+                            <span class="qs-step-num">2</span>
+                            <span class="qs-step-text">Login<span class="qs-step-hint">Select Claude.ai, sign in</span></span>
+                        </div>
+                        <div class="qs-step" id="step3">
+                            <span class="qs-step-num">3</span>
+                            <span class="qs-step-text">Build<span class="qs-step-hint">Describe what you want</span></span>
+                        </div>
                     </div>
-                    <div class="terminal terminal--compact">
+
+                    <div class="qs-terminal">
                         <div class="terminal-header">
                             <div class="terminal-btn terminal-btn--red"></div>
                             <div class="terminal-btn terminal-btn--yellow"></div>
@@ -1636,107 +1793,47 @@
                             <div class="terminal-title">Terminal</div>
                         </div>
                         <div class="terminal-body">
-                            <div class="terminal-line terminal-line-with-copy">
+                            <!-- Step 1: Install -->
+                            <div class="terminal-line copy-line">
                                 <span><span class="terminal-prompt">$ </span><span class="terminal-command" id="install-cmd">curl -fsSL https://claude.ai/install.sh | bash</span></span>
                                 <button class="copy-btn" onclick="copyCmd('install-cmd', this)">Copy</button>
                             </div>
-                            <div class="terminal-line terminal-output" data-fragment="1">Setting up Claude Code...</div>
-                            <div class="terminal-line terminal-success" data-fragment="1">✅ Installation complete!</div>
-                            <div class="terminal-line" data-fragment="1"></div>
-                            <div class="terminal-line terminal-output" data-fragment="1">Run this to add claude to your path:</div>
-                            <div class="terminal-line terminal-output terminal-path-example" data-fragment="1">  export PATH="..."</div>
-                        </div>
-                    </div>
-                </div>
-                <p class="howto-footnote" data-fragment="1">
-                    <span class="nav-hint">Copy whatever PATH command it shows you, paste it, hit Enter</span>
-                </p>
-            </div>
-        </div>
 
-        <!-- =============================================
-             QUICKSTART SLIDE 3: STEP 2 - LOGIN
-             ============================================= -->
-        <div class="slide" id="qs-step2">
-            <div class="slide-content slide-howto">
-                <h2 class="howto-title">Step 2: Login to Claude</h2>
-                <div class="howto-container">
-                    <div class="howto-instructions">
-                        <ol class="setup-steps">
-                            <li>Type <code>claude</code> and hit Enter</li>
-                            <li>Select <strong>Claude.ai</strong></li>
-                            <li>Sign in via browser</li>
-                        </ol>
-                    </div>
-                    <div class="terminal terminal--compact">
-                        <div class="terminal-header">
-                            <div class="terminal-btn terminal-btn--red"></div>
-                            <div class="terminal-btn terminal-btn--yellow"></div>
-                            <div class="terminal-btn terminal-btn--green"></div>
-                            <div class="terminal-title">Terminal</div>
-                        </div>
-                        <div class="terminal-body">
-                            <div class="terminal-line terminal-output">...</div>
-                            <div class="terminal-line terminal-success">✅ Installation complete!</div>
-                            <div class="terminal-line"></div>
-                            <div class="terminal-line">
-                                <span class="terminal-prompt">$ </span><span class="terminal-command">claude</span>
+                            <div class="qs-block" data-fragment="1" data-step="1">
+                                <div class="terminal-line terminal-output">Setting up Claude Code...</div>
+                                <div class="terminal-line terminal-success">✅ Installation complete!</div>
+                                <div class="terminal-line terminal-output" style="opacity:0.6; font-style:italic">  (copy the PATH command it shows, paste & enter)</div>
                             </div>
-                            <div class="terminal-line terminal-output">Welcome to Claude Code!</div>
-                            <div class="terminal-line"></div>
-                            <div class="terminal-line terminal-output">? How would you like to authenticate?</div>
-                            <div class="terminal-line terminal-claude">❯ Claude.ai</div>
-                            <div class="terminal-line terminal-output">  Anthropic API</div>
-                        </div>
-                    </div>
-                </div>
-                <p class="howto-footnote">
-                    <span class="nav-hint">A browser will open. Sign in, then return here.</span>
-                </p>
-            </div>
-        </div>
 
-        <!-- =============================================
-             QUICKSTART SLIDE 4: STEP 3 - START BUILDING
-             ============================================= -->
-        <div class="slide" id="qs-step3">
-            <div class="slide-content slide-howto">
-                <h2 class="howto-title">Step 3: Describe what you want to build</h2>
-                <div class="howto-container">
-                    <div class="howto-instructions">
-                        <p class="setup-instruction">Type your idea with as much detail as you have</p>
-                    </div>
-                    <div class="terminal terminal--compact">
-                        <div class="terminal-header">
-                            <div class="terminal-btn terminal-btn--red"></div>
-                            <div class="terminal-btn terminal-btn--yellow"></div>
-                            <div class="terminal-btn terminal-btn--green"></div>
-                            <div class="terminal-title">Terminal</div>
-                        </div>
-                        <div class="terminal-body">
-                            <div class="terminal-line terminal-output">...</div>
-                            <div class="terminal-line terminal-success">✓ Signed in as wesley@example.com</div>
-                            <div class="terminal-line"></div>
-                            <div class="terminal-line">
-                                <span class="terminal-claude">&gt; </span><span class="terminal-typing">Enter planning mode: Generate a product</span>
+                            <!-- Step 2: Login -->
+                            <div class="qs-block" data-fragment="2" data-step="2">
+                                <div class="terminal-line"></div>
+                                <div class="terminal-line">
+                                    <span class="terminal-prompt">$ </span><span class="terminal-command">claude</span>
+                                </div>
+                                <div class="terminal-line terminal-output">Welcome to Claude Code!</div>
+                                <div class="terminal-line terminal-output">? How would you like to authenticate?</div>
+                                <div class="terminal-line terminal-claude">❯ Claude.ai</div>
+                                <div class="terminal-line terminal-output">  Anthropic API</div>
                             </div>
-                            <div class="terminal-line">
-                                <span class="terminal-typing">  requirements document and help me build</span>
-                            </div>
-                            <div class="terminal-line">
-                                <span class="terminal-typing">  [describe what you want...]</span><span class="terminal-cursor">▋</span>
+
+                            <!-- Step 3: Build -->
+                            <div class="qs-block" data-fragment="3" data-step="3">
+                                <div class="terminal-line"></div>
+                                <div class="terminal-line terminal-success">✓ Logged in</div>
+                                <div class="terminal-line"></div>
+                                <div class="terminal-line">
+                                    <span class="terminal-claude">&gt; </span><span class="terminal-typing">Enter planning mode: Generate a PRD</span>
+                                </div>
+                                <div class="terminal-line">
+                                    <span class="terminal-typing">  and help me build [your idea here]</span><span class="terminal-cursor">▋</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="callout-idea" data-fragment="1">
-                    <strong>Not sure what to build?</strong> Try:
-                    <ul class="idea-list">
-                        <li>"A Chrome extension that summarizes articles"</li>
-                        <li>"A script that organizes my downloads folder"</li>
-                        <li>"A website for my small business"</li>
-                    </ul>
-                </div>
+
+                <p class="qs-footer"><a href="https://code.claude.com/docs" target="_blank">Official docs →</a></p>
             </div>
         </div>
 
@@ -1995,7 +2092,7 @@
         var isBlackout = false;
 
         // ── Quickstart slide count (for ?presentation param) ──
-        var QUICKSTART_SLIDES = 4;
+        var QUICKSTART_SLIDES = 2;
 
         // ── Fragments ──────────────────────────────────
         function getFragmentSteps(slideEl) {
@@ -2028,6 +2125,7 @@
                 for (var i = 0; i < els.length; i++) {
                     els[i].classList.add('visible');
                 }
+                updateStepIndicators(slideEl);
                 return true;
             }
             return false;
@@ -2042,9 +2140,28 @@
                 for (var i = 0; i < els.length; i++) {
                     els[i].classList.remove('visible');
                 }
+                updateStepIndicators(slideEl);
                 return true;
             }
             return false;
+        }
+
+        // ── Update step indicators for quickstart slide ──
+        function updateStepIndicators(slideEl) {
+            var stepEls = slideEl.querySelectorAll('.qs-step');
+            if (stepEls.length === 0) return;
+
+            // Find which step we're on based on visible fragments
+            var visibleBlocks = slideEl.querySelectorAll('.qs-block.visible');
+            var currentStep = visibleBlocks.length;
+
+            stepEls.forEach(function(step, index) {
+                if (index <= currentStep) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
         }
 
         function resetFragments(slideEl) {
