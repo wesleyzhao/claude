@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code Handout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: letter;
+            margin: 0.5in;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1B1B1B;
+            background: white;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            width: 7.5in;
+            height: 10in;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== TOP HALF: CTA ===== */
+        .top-half {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0.25in 0;
+            border-bottom: 1px solid #E5E5E0;
+        }
+
+        .cta-headline {
+            font-size: 28pt;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .claude-logo {
+            height: 24px;
+            opacity: 0.7;
+            margin-bottom: 8px;
+        }
+
+        .cta-subline {
+            font-size: 14pt;
+            color: #7A7A75;
+            margin-bottom: 16px;
+        }
+
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 4px;
+        }
+
+        .qr-url {
+            font-size: 10pt;
+            color: #7A7A75;
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+
+        /* ===== BOTTOM HALF: INSTRUCTIONS ===== */
+        .bottom-half {
+            flex: 1;
+            padding: 0.3in 0.25in;
+        }
+
+        .instructions-title {
+            font-size: 16pt;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .step {
+            display: flex;
+            gap: 12px;
+        }
+
+        .step-num {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            background: #D4725C;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12pt;
+            font-weight: 700;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-header {
+            font-size: 13pt;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .step-description {
+            font-size: 10pt;
+            color: #1B1B1B;
+            margin-bottom: 6px;
+        }
+
+        .step-command {
+            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+            font-size: 11pt;
+            font-weight: 700;
+            color: #1B1B1B;
+            background: #F5F5F3;
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+
+        .step-note {
+            font-size: 9pt;
+            color: #AAAAAA;
+            font-style: italic;
+        }
+
+        /* Print-specific */
+        @media print {
+            body {
+                background: white;
+            }
+            .page {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        /* Screen preview */
+        @media screen {
+            body {
+                background: #f0f0f0;
+                padding: 20px;
+            }
+            .page {
+                background: white;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- TOP HALF: CTA -->
+        <div class="top-half">
+            <h1 class="cta-headline">Make something with Claude Code.</h1>
+            <img class="claude-logo" src="claude-logo.png" alt="Claude">
+            <p class="cta-subline">Spend one hour, this week.</p>
+            <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wesleyzhao.com/claude/" alt="QR Code">
+            <p class="qr-url">wesleyzhao.com/claude</p>
+        </div>
+
+        <!-- BOTTOM HALF: INSTRUCTIONS -->
+        <div class="bottom-half">
+            <h2 class="instructions-title">Getting started quickly with Claude Code</h2>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <div class="step-header">Install</div>
+                        <div class="step-description">Open Terminal, paste the command, and press Enter.</div>
+                        <div class="step-command">curl -fsSL https://claude.ai/install.sh | bash</div>
+                        <div class="step-note">Read output. If asked, copy/paste the PATH command shown and press Enter.</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <div class="step-header">Start Claude</div>
+                        <div class="step-description">Type "claude", hit Enter, and finish signing in.</div>
+                        <div class="step-command">claude</div>
+                        <div class="step-note">Select "Claude.ai" when asked how to authenticate.</div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <div class="step-header">Build</div>
+                        <div class="step-description">Describe what you want to build and press Enter.</div>
+                        <div class="step-command">Enter planning mode: Generate a PRD and help me build...</div>
+                        <div class="step-note">Replace "..." with your project idea.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
