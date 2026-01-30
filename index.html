@@ -689,7 +689,7 @@
         .evidence-info {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 1px;
         }
 
         .evidence-name {
@@ -703,15 +703,15 @@
             font-size: var(--size-tiny);
             color: var(--subtle);
             font-weight: var(--weight-normal);
-            line-height: 1.3;
+            line-height: 1.2;
         }
 
         .evidence-project {
-            font-size: var(--size-small);
+            font-size: var(--size-tiny);
             font-weight: var(--weight-medium);
             color: var(--accent);
-            line-height: 1.3;
-            margin-top: 2px;
+            line-height: 1.2;
+            white-space: nowrap;
         }
 
         /* ============================================
@@ -1013,7 +1013,7 @@
            ============================================ */
         .slide-couplet {
             text-align: right;
-            max-width: 700px;
+            max-width: 500px;
             align-items: flex-end;
         }
 
@@ -1056,10 +1056,10 @@
         }
 
         .cta-headline {
-            font-size: var(--size-display);
-            font-weight: var(--weight-black);
-            color: var(--accent);
-            letter-spacing: -0.03em;
+            font-size: var(--size-title);
+            font-weight: var(--weight-semibold);
+            color: var(--text);
+            letter-spacing: -0.02em;
             line-height: var(--line-height-tight);
         }
 
@@ -1175,13 +1175,13 @@
         <!-- =============================================
              SLIDE 3: EMERSON
              ============================================= -->
-        <div class="slide slide--rect slide--centered-photo" id="slide-2">
+        <div class="slide slide--rect slide--centered-photo" id="slide-3">
             <div class="slide-content slide-emerson">
                 <div class="emerson-photo-single">
                     <img src="emerson-dimsum.jpg" alt="Emerson" class="emerson-img" data-fragment="1">
                     <img src="emerson-gaming.jpg" alt="Emerson gaming" class="emerson-img emerson-img--second" data-fragment="2">
                 </div>
-                <h2 class="so-easy-title-centered" data-fragment="1">It's so easy, an <em>Emerson</em> can do it.</h2>
+                <h2 class="so-easy-title-centered" data-fragment="2">It's so easy, an <em>Emerson</em> can do it.</h2>
             </div>
         </div>
 
@@ -1255,9 +1255,30 @@
         </div>
 
         <!-- =============================================
-             SLIDE 5: WHY CLAUDE CODE
+             SLIDE 5: CAMUS QUOTE
              ============================================= -->
         <div class="slide" id="slide-5">
+            <div class="slide-content slide-quote">
+                <p class="quote-text">I rebel—therefore we exist.</p>
+                <p class="quote-attribution">Albert Camus</p>
+            </div>
+        </div>
+
+        <!-- =============================================
+             SLIDE 6: GSB MOTTO
+             ============================================= -->
+        <div class="slide" id="slide-6">
+            <div class="slide-content slide-quote">
+                <p class="punchline-text">
+                    <span class="line">Change lives. Change organizations.</span>
+                    <span class="line">Change the world.</span>
+                </p>
+                <p class="quote-attribution">Stanford GSB</p>
+            </div>
+        </div>
+
+        <!-- WHY CLAUDE CODE - Hidden for now
+        <div class="slide" id="slide-why">
             <div class="slide-content slide-why">
                 <h2 class="why-title">Why Claude Code?</h2>
                 <div class="why-comparison">
@@ -1275,13 +1296,14 @@
                 <p class="why-bottom">It's the difference between a demo and a real tool.</p>
             </div>
         </div>
+        -->
 
         <!-- =============================================
-             SLIDE 6: HOW TO START (Terminal)
+             SLIDE 7: HOW TO START (Terminal)
              ============================================= -->
         <div class="slide" id="slide-6">
             <div class="slide-content slide-howto">
-                <h2 class="howto-title">How to start</h2>
+                <h2 class="howto-title">Starting is very easy</h2>
                 <div class="howto-container">
                     <div class="howto-steps">
                         <div class="howto-step" data-fragment="1">
@@ -1290,7 +1312,7 @@
                         </div>
                         <div class="howto-step" data-fragment="2">
                             <span class="howto-number">2</span>
-                            <span class="howto-label">Ask for help</span>
+                            <span class="howto-label">Describe</span>
                         </div>
                         <div class="howto-step" data-fragment="3">
                             <span class="howto-number">3</span>
