@@ -1741,34 +1741,34 @@
                             <div class="terminal-title">Terminal</div>
                         </div>
                         <div class="terminal-body">
-                            <!-- Step 1: Install -->
+                            <!-- Step 1: Install (always visible) -->
                             <div class="terminal-line copy-line">
                                 <span><span class="terminal-prompt">$ </span><span class="terminal-command" id="install-cmd">curl -fsSL https://claude.ai/install.sh | bash</span></span>
                                 <button class="copy-btn" onclick="copyCmd('install-cmd', this)">Copy</button>
                             </div>
-
-                            <div class="qs-block" data-fragment="1" data-step="1">
-                                <div class="terminal-line terminal-output">Setting up Claude Code...</div>
-                                <div class="terminal-line terminal-success">✅ Installation complete!</div>
-                                <div class="terminal-line terminal-warning">⚠ Copy the PATH command it shows, paste & enter</div>
+                            <div class="terminal-line terminal-output">Installing Claude Code...</div>
+                            <div class="terminal-line terminal-success">✅ Installed!</div>
+                            <div class="terminal-line terminal-warning">⚠ Run the command it shows:</div>
+                            <div class="terminal-line copy-line" style="margin-left: 16px;">
+                                <span><span class="terminal-output" id="path-cmd">export PATH="$HOME/.claude/bin:$PATH"</span></span>
+                                <button class="copy-btn" onclick="copyCmd('path-cmd', this)">Copy</button>
                             </div>
 
                             <!-- Step 2: Login -->
-                            <div class="qs-block" data-fragment="2" data-step="2">
+                            <div class="qs-block" data-fragment="1">
                                 <div class="terminal-line"></div>
                                 <div class="terminal-line">
                                     <span class="terminal-prompt">$ </span><span class="terminal-command">claude</span>
                                 </div>
-                                <div class="terminal-line terminal-output">Welcome to Claude Code!</div>
                                 <div class="terminal-line terminal-output">? How would you like to authenticate?</div>
                                 <div class="terminal-line terminal-claude">❯ Claude.ai</div>
-                                <div class="terminal-line terminal-output">  Anthropic API</div>
+                                <div class="terminal-line terminal-output" style="opacity: 0.5;">  Anthropic API</div>
                             </div>
 
                             <!-- Step 3: Build -->
-                            <div class="qs-block" data-fragment="3" data-step="3">
+                            <div class="qs-block" data-fragment="2">
                                 <div class="terminal-line"></div>
-                                <div class="terminal-line terminal-success">✓ Logged in</div>
+                                <div class="terminal-line terminal-success">✓ Signed in</div>
                                 <div class="terminal-line"></div>
                                 <div class="terminal-line">
                                     <span class="terminal-claude">&gt; </span><span class="terminal-typing">Enter planning mode: Generate a PRD</span>
