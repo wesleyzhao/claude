@@ -546,6 +546,7 @@
         .slide--centered-photo .slide-emerson {
             justify-content: center;
             gap: var(--space-lg);
+            margin-top: -80px;
         }
 
         .emerson-photo-single {
@@ -583,7 +584,7 @@
             letter-spacing: -0.01em;
             text-align: center;
             position: absolute;
-            bottom: 18%;
+            bottom: 22%;
             left: 0;
             right: 0;
             padding: 0 var(--space-xl);
@@ -628,6 +629,7 @@
         .slide--centered-evidence .slide-evidence {
             justify-content: center;
             gap: var(--space-lg);
+            margin-top: -80px;
         }
 
         .slide--centered-evidence .evidence-grid {
@@ -1077,10 +1079,22 @@
             border-radius: var(--radius-sm);
         }
 
+        .qr-url {
+            font-size: var(--size-small);
+            color: var(--subtle);
+            font-family: 'SF Mono', Monaco, monospace;
+            margin-top: -20px;
+        }
+
         .cta-footer {
-            font-size: var(--size-body);
-            color: var(--text);
-            font-weight: var(--weight-medium);
+            font-size: var(--size-large);
+            color: var(--subtle);
+            font-weight: var(--weight-normal);
+        }
+
+        .claude-logo {
+            height: 32px;
+            opacity: 0.8;
         }
 
         /* ============================================
@@ -1924,7 +1938,10 @@
              ============================================= -->
         <div class="slide" id="slide-5">
             <div class="slide-content slide-quote">
-                <p class="quote-text">I rebel—therefore we exist.</p>
+                <p class="punchline-text">
+                    <span class="line">"I rebel—</span>
+                    <span class="line">therefore we exist."</span>
+                </p>
                 <p class="quote-attribution">Albert Camus</p>
             </div>
         </div>
@@ -1968,7 +1985,7 @@
              ============================================= -->
         <div class="slide" id="slide-6">
             <div class="slide-content slide-howto">
-                <h2 class="howto-title">Starting is very easy</h2>
+                <h2 class="howto-title">Starting is very easy.</h2>
                 <div class="howto-container">
                     <div class="howto-steps">
                         <div class="howto-step" data-fragment="1">
@@ -2041,10 +2058,13 @@
              ============================================= -->
         <div class="slide" id="slide-8">
             <div class="slide-content slide-cta">
-                <h1 class="cta-headline">Make something<br>with Claude Code.</h1>
+                <h1 class="cta-headline">Make something with Claude Code.</h1>
+                <img class="claude-logo" src="claude-logo.png" alt="Claude">
                 <p class="cta-subline">Spend one hour, this week.</p>
-                <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://calendly.com/weszhao-stanford/30min" alt="Book a time with Wesley">
+                <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wesleyzhao.com/claude/" alt="Book a time with Wesley">
+                <p class="qr-url">wesleyzhao.com/claude</p>
                 <p class="cta-footer">I'm happy to help.</p>
+                <p class="cta-footer" data-fragment="1">And happy to answer questions.</p>
             </div>
         </div>
 
