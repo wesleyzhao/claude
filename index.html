@@ -1245,7 +1245,7 @@
            ============================================ */
         .slide-quickstart {
             justify-content: flex-start !important;
-            padding-top: 12vh;
+            padding-top: 8vh;
         }
 
         .slide-quickstart .qs-title {
@@ -1355,7 +1355,7 @@
             font-family: 'SF Mono', Monaco, monospace;
             font-size: 14px;
             line-height: 1.7;
-            min-height: 280px;
+            min-height: 320px;
         }
 
         .qs-terminal .terminal-line {
@@ -1422,14 +1422,16 @@
             max-height: 200px;
         }
 
-        /* Dynamic hint below terminal */
+        /* Dynamic hint above terminal */
         .qs-hint {
-            margin-top: var(--space-lg);
             font-size: var(--size-body);
             color: var(--text);
-            font-weight: var(--weight-medium);
+            font-weight: var(--weight-normal);
             text-align: center;
-            transition: opacity var(--transition-medium);
+            max-width: 700px;
+            min-height: 3.5em;
+            line-height: 1.5;
+            margin-bottom: var(--space-md);
         }
 
         /* Footer hint */
@@ -1727,19 +1729,22 @@
             <div class="slide-content slide-quickstart">
                 <h2 class="qs-title">Get Started with Claude Code</h2>
 
+                <!-- Instructions above terminal -->
+                <p class="qs-hint" id="qs-hint">Open Terminal on your Mac, paste the command below, and press Enter.</p>
+
                 <div class="qs-main">
                     <div class="qs-steps">
                         <div class="qs-step active" id="step1">
                             <span class="qs-step-num">1</span>
-                            <span class="qs-step-text">Install<span class="qs-step-hint">Open Terminal, paste command</span></span>
+                            <span class="qs-step-text">Install</span>
                         </div>
                         <div class="qs-step" id="step2">
                             <span class="qs-step-num">2</span>
-                            <span class="qs-step-text">Login<span class="qs-step-hint">Select Claude.ai, sign in</span></span>
+                            <span class="qs-step-text">Start Claude</span>
                         </div>
                         <div class="qs-step" id="step3">
                             <span class="qs-step-num">3</span>
-                            <span class="qs-step-text">Build<span class="qs-step-hint">Describe what you want</span></span>
+                            <span class="qs-step-text">Build</span>
                         </div>
                     </div>
 
@@ -1761,14 +1766,13 @@
                             <div class="qs-block" data-fragment="1" data-step="1">
                                 <div class="terminal-line terminal-output">Installing Claude Code...</div>
                                 <div class="terminal-line terminal-success">✅ Installed!</div>
-                                <div class="terminal-line terminal-warning">⚠ Run the command it shows:</div>
-                                <div class="terminal-line copy-line" style="margin-left: 16px;">
-                                    <span><span class="terminal-output" id="path-cmd">export PATH="$HOME/.claude/bin:$PATH"</span></span>
-                                    <button class="copy-btn" onclick="copyCmd('path-cmd', this)">Copy</button>
+                                <div class="terminal-line terminal-warning">⚠ It will show a PATH command like:</div>
+                                <div class="terminal-line" style="margin-left: 16px;">
+                                    <span class="terminal-output">export PATH="$HOME/.claude/bin:$PATH"</span>
                                 </div>
                             </div>
 
-                            <!-- Step 2: Login -->
+                            <!-- Step 2: Start Claude -->
                             <div class="qs-block" data-fragment="2" data-step="2">
                                 <div class="terminal-line"></div>
                                 <div class="terminal-line">
@@ -1784,18 +1788,14 @@
                                 <div class="terminal-line"></div>
                                 <div class="terminal-line terminal-success">✓ Signed in</div>
                                 <div class="terminal-line"></div>
-                                <div class="terminal-line">
-                                    <span class="terminal-claude">&gt; </span><span class="terminal-typing">Enter planning mode: Generate a PRD</span>
-                                </div>
-                                <div class="terminal-line">
-                                    <span class="terminal-typing">  and help me build [your idea here]</span><span class="terminal-cursor">▋</span>
+                                <div class="terminal-line copy-line">
+                                    <span><span class="terminal-claude">&gt; </span><span class="terminal-typing" id="build-cmd">Enter planning mode: Generate a PRD and help me build...</span></span>
+                                    <button class="copy-btn" onclick="copyCmd('build-cmd', this)">Copy</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <p class="qs-hint" id="qs-hint">Open Terminal on your Mac and paste the command above</p>
                 <p class="qs-footer"><a href="https://code.claude.com/docs" target="_blank">Official docs →</a></p>
             </div>
         </div>
@@ -2140,10 +2140,10 @@
             var hint = document.getElementById('qs-hint');
             if (hint) {
                 var hints = [
-                    'Open Terminal on your Mac and paste the command above',
-                    'Copy and run the PATH command shown, then continue',
-                    'Type "claude" and select Claude.ai to sign in',
-                    'Describe what you want to build and press Enter!'
+                    'Open Terminal on your Mac, paste the command below, and press Enter.',
+                    'Read the output carefully. Copy and paste the PATH command it shows into your Terminal, and press Enter. It will look something like what it shows below.',
+                    'Type "claude", hit Enter, and select Claude.ai to sign in.',
+                    'Describe what you want to build and press Enter. Feel free to copy the beginning of the prompt below if you\'d like.'
                 ];
                 var hintIndex = 0;
                 if (currentStep === 1 && hasOutput) hintIndex = 1;
