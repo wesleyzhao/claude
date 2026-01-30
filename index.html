@@ -1434,76 +1434,28 @@
             text-decoration: underline;
         }
 
-        .setup-steps {
-            list-style: none;
-            counter-reset: step;
-            padding: 0;
-            margin: 0;
-        }
-
-        .setup-steps li {
-            position: relative;
-            padding-left: 48px;
-            margin-bottom: var(--space-lg);
-            font-size: var(--size-body);
-            line-height: var(--line-height);
-        }
-
-        .setup-steps li::before {
-            counter-increment: step;
-            content: counter(step);
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: var(--howto-number-size);
-            height: var(--howto-number-size);
-            border-radius: 50%;
-            background: var(--accent);
-            color: var(--white);
-            font-size: var(--size-small);
-            font-weight: var(--weight-bold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .setup-hint {
-            display: block;
-            font-size: var(--size-small);
-            color: var(--subtle);
-            margin-top: 4px;
-        }
-
-        .setup-instruction {
-            font-size: var(--size-large);
-            font-weight: var(--weight-medium);
-            margin-bottom: var(--space-md);
-        }
-
-        .setup-instruction code {
-            background: var(--accent-light);
-            color: var(--accent-dark);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-family: 'SF Mono', Monaco, monospace;
-        }
-
         /* ============================================
-           QUICKSTART: COPY BUTTON
+           QUICKSTART: MOBILE
            ============================================ */
-        .terminal-line-with-copy {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: var(--space-sm);
+        @media (max-width: 800px) {
+            .qs-main {
+                flex-direction: column;
+                align-items: center;
+            }
+            .qs-steps {
+                flex: none;
+                display: flex;
+                gap: var(--space-lg);
+                margin-bottom: var(--space-md);
+            }
+            .qs-terminal {
+                flex: none;
+                width: 100%;
+                max-width: 500px;
+            }
         }
 
-        .terminal-line-with-copy code {
-            background: none;
-            font-family: inherit;
-            font-size: inherit;
-        }
-
+        /* Legacy copy-btn for presentation slides */
         .copy-btn {
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
