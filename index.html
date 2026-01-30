@@ -1145,15 +1145,559 @@
                 display: none;
             }
         }
+
+        /* ============================================
+           QUICKSTART: ENTRY POINT SLIDE
+           ============================================ */
+        .slide-entry {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: var(--space-xl);
+        }
+
+        .entry-title {
+            font-size: var(--size-hero);
+            font-weight: var(--weight-bold);
+            letter-spacing: -0.02em;
+            line-height: var(--line-height-tight);
+            color: var(--text);
+        }
+
+        .entry-cards {
+            display: flex;
+            gap: var(--space-xl);
+            justify-content: center;
+        }
+
+        .entry-card {
+            width: 280px;
+            padding: var(--space-xl) var(--space-lg);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            cursor: pointer;
+            transition: transform var(--transition-fast),
+                        box-shadow var(--transition-fast);
+            text-decoration: none;
+            display: block;
+        }
+
+        .entry-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .entry-card--primary {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .entry-card--secondary {
+            background: var(--white);
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+
+        .entry-card--secondary:hover {
+            border-color: var(--accent);
+        }
+
+        .entry-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .entry-card-title {
+            font-size: var(--size-large);
+            font-weight: var(--weight-bold);
+            margin-bottom: var(--space-xs);
+        }
+
+        .entry-card-desc {
+            font-size: var(--size-body);
+            opacity: 0.9;
+            margin-bottom: var(--space-xs);
+        }
+
+        .entry-card-time {
+            font-size: var(--size-small);
+            opacity: 0.7;
+        }
+
+        .entry-skip {
+            margin-top: var(--space-md);
+        }
+
+        .entry-skip a {
+            font-size: var(--size-small);
+            color: var(--subtle);
+            text-decoration: none;
+        }
+
+        .entry-skip a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           QUICKSTART: STEP INSTRUCTIONS
+           ============================================ */
+        .howto-instructions {
+            flex: 0 0 320px;
+            text-align: left;
+        }
+
+        .setup-steps {
+            list-style: none;
+            counter-reset: step;
+            padding: 0;
+            margin: 0;
+        }
+
+        .setup-steps li {
+            position: relative;
+            padding-left: 48px;
+            margin-bottom: var(--space-lg);
+            font-size: var(--size-body);
+            line-height: var(--line-height);
+        }
+
+        .setup-steps li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: var(--howto-number-size);
+            height: var(--howto-number-size);
+            border-radius: 50%;
+            background: var(--accent);
+            color: var(--white);
+            font-size: var(--size-small);
+            font-weight: var(--weight-bold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .setup-hint {
+            display: block;
+            font-size: var(--size-small);
+            color: var(--subtle);
+            margin-top: 4px;
+        }
+
+        .setup-instruction {
+            font-size: var(--size-large);
+            font-weight: var(--weight-medium);
+            margin-bottom: var(--space-md);
+        }
+
+        .setup-instruction code {
+            background: var(--accent-light);
+            color: var(--accent-dark);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+
+        /* ============================================
+           QUICKSTART: COPY BUTTON
+           ============================================ */
+        .terminal-line-with-copy {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .copy-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #8b949e;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            flex-shrink: 0;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255,255,255,0.2);
+            color: #f0f0f0;
+        }
+
+        .copy-btn.copied {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        /* ============================================
+           QUICKSTART: CALLOUTS
+           ============================================ */
+        .callout-warning {
+            background: #FEF9E7;
+            border: 1px solid #F9E79F;
+            border-left: 4px solid #F4D03F;
+            border-radius: var(--radius-sm);
+            padding: var(--space-md) var(--space-lg);
+            text-align: left;
+            max-width: 700px;
+            margin-top: var(--space-lg);
+        }
+
+        .callout-warning strong {
+            color: #9A7B4F;
+            font-size: var(--size-body);
+        }
+
+        .callout-warning p {
+            font-size: var(--size-small);
+            color: var(--text);
+            margin: var(--space-sm) 0;
+        }
+
+        .callout-warning code {
+            background: rgba(0,0,0,0.08);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: var(--size-small);
+        }
+
+        .code-block {
+            background: #1a1a2e;
+            border-radius: var(--radius-sm);
+            padding: var(--space-sm) var(--space-md);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: var(--space-sm) 0;
+        }
+
+        .code-block code {
+            background: none;
+            color: #7ee787;
+            font-size: var(--size-small);
+        }
+
+        .callout-idea {
+            background: #EDE7F6;
+            border: 1px solid #B39DDB;
+            border-left: 4px solid #7E57C2;
+            border-radius: var(--radius-sm);
+            padding: var(--space-md) var(--space-lg);
+            text-align: left;
+            max-width: 700px;
+            margin-top: var(--space-lg);
+        }
+
+        .callout-idea strong {
+            color: #5E35B1;
+            font-size: var(--size-body);
+        }
+
+        .idea-list {
+            margin: var(--space-sm) 0 0 var(--space-md);
+            padding: 0;
+            list-style: disc;
+        }
+
+        .idea-list li {
+            font-size: var(--size-small);
+            color: var(--text);
+            margin-bottom: var(--space-xs);
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+
+        /* ============================================
+           QUICKSTART: TERMINAL CURSOR
+           ============================================ */
+        .terminal-cursor {
+            color: #7ee787;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* ============================================
+           QUICKSTART: SMALLER TERMINAL VARIANT
+           ============================================ */
+        .terminal--compact .terminal-body {
+            min-height: 200px;
+            padding: var(--space-md) var(--space-lg);
+        }
+
+        .terminal--compact .terminal-line {
+            margin-bottom: 4px;
+        }
+
+        /* ============================================
+           QUICKSTART: NAV HINT FOOTER
+           ============================================ */
+        .nav-hint {
+            color: var(--subtle);
+            font-size: var(--size-small);
+        }
+
+        .howto-footnote-split {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: var(--content-max-width-wide);
+            margin-top: var(--space-lg);
+        }
+
+        .howto-footnote a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: var(--size-small);
+        }
+
+        .howto-footnote a:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           QUICKSTART: MOBILE RESPONSIVE
+           ============================================ */
+        @media (max-width: 600px) {
+            .entry-cards {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+
+            .entry-card {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .entry-title {
+                font-size: var(--size-title);
+            }
+
+            .howto-container {
+                flex-direction: column;
+            }
+
+            .howto-instructions {
+                flex: none;
+                width: 100%;
+                margin-bottom: var(--space-md);
+            }
+
+            .callout-warning,
+            .callout-idea {
+                margin: var(--space-md) 0;
+            }
+
+            .code-block {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+
+            .code-block .copy-btn {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="presentation">
 
         <!-- =============================================
-             SLIDE 1: RUDY QUOTE
+             QUICKSTART SLIDE 1: ENTRY POINT
              ============================================= -->
-        <div class="slide active" id="slide-1">
+        <div class="slide active" id="qs-entry">
+            <div class="slide-content slide-entry">
+                <h1 class="entry-title">Start making something<br>with Claude Code</h1>
+                <div class="entry-cards">
+                    <div class="entry-card entry-card--primary" data-action="next">
+                        <div class="entry-icon">⚡</div>
+                        <h2 class="entry-card-title">Quickstart</h2>
+                        <p class="entry-card-desc">Self-guided setup</p>
+                        <p class="entry-card-time">~5 minutes</p>
+                    </div>
+                    <a class="entry-card entry-card--secondary" href="https://calendly.com/weszhao-stanford/30min?month=2026-01" target="_blank">
+                        <div class="entry-icon">📅</div>
+                        <h2 class="entry-card-title">Book time with me</h2>
+                        <p class="entry-card-desc">I'll help you get started</p>
+                        <p class="entry-card-time">30-min session</p>
+                    </a>
+                </div>
+                <p class="entry-skip"><a href="?presentation">Already set up? View presentation →</a></p>
+            </div>
+        </div>
+
+        <!-- =============================================
+             QUICKSTART SLIDE 2: STEP 1 - INSTALL
+             ============================================= -->
+        <div class="slide" id="qs-step1">
+            <div class="slide-content slide-howto">
+                <h2 class="howto-title">Step 1: Install Claude Code</h2>
+                <div class="howto-container">
+                    <div class="howto-instructions">
+                        <ol class="setup-steps">
+                            <li>Open the <strong>Terminal</strong> app on your Mac
+                                <span class="setup-hint">Cmd+Space → type "Terminal"</span>
+                            </li>
+                            <li>Copy-paste this command and hit <strong>Enter</strong></li>
+                        </ol>
+                    </div>
+                    <div class="terminal terminal--compact">
+                        <div class="terminal-header">
+                            <div class="terminal-btn terminal-btn--red"></div>
+                            <div class="terminal-btn terminal-btn--yellow"></div>
+                            <div class="terminal-btn terminal-btn--green"></div>
+                            <div class="terminal-title">Terminal</div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="terminal-line terminal-line-with-copy">
+                                <span><span class="terminal-prompt">$ </span><span class="terminal-command" id="install-cmd">curl -fsSL https://claude.ai/install.sh | bash</span></span>
+                                <button class="copy-btn" onclick="copyCmd('install-cmd', this)">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="howto-footnote-split">
+                    <a href="https://code.claude.com/docs" target="_blank">Official docs →</a>
+                    <span class="nav-hint">Click next or swipe right when done</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================
+             QUICKSTART SLIDE 3: STEP 2 - VERIFY
+             ============================================= -->
+        <div class="slide" id="qs-step2">
+            <div class="slide-content slide-howto">
+                <h2 class="howto-title">Step 2: Make sure it worked</h2>
+                <div class="howto-container">
+                    <div class="howto-instructions">
+                        <p class="setup-instruction">Type <code>claude</code> and hit <strong>Enter</strong></p>
+                    </div>
+                    <div class="terminal terminal--compact">
+                        <div class="terminal-header">
+                            <div class="terminal-btn terminal-btn--red"></div>
+                            <div class="terminal-btn terminal-btn--yellow"></div>
+                            <div class="terminal-btn terminal-btn--green"></div>
+                            <div class="terminal-title">Terminal</div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">$ </span><span class="terminal-command">claude</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="callout-warning" data-fragment="1">
+                    <strong>Didn't work?</strong> You may need to add Claude to your PATH.
+                    <p>Copy-paste this command and hit Enter:</p>
+                    <div class="code-block">
+                        <code id="path-cmd">export PATH="$HOME/.local/bin:$PATH"</code>
+                        <button class="copy-btn" onclick="copyCmd('path-cmd', this)">Copy</button>
+                    </div>
+                    <p>Then try <code>claude</code> again.</p>
+                </div>
+                <p class="howto-footnote">
+                    <span class="nav-hint">Click next when you see the Claude welcome screen</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- =============================================
+             QUICKSTART SLIDE 4: STEP 3 - LOGIN
+             ============================================= -->
+        <div class="slide" id="qs-step3">
+            <div class="slide-content slide-howto">
+                <h2 class="howto-title">Step 3: Login to Claude</h2>
+                <div class="howto-container">
+                    <div class="howto-instructions">
+                        <p class="setup-instruction">Follow the prompts to log in</p>
+                    </div>
+                    <div class="terminal terminal--compact">
+                        <div class="terminal-header">
+                            <div class="terminal-btn terminal-btn--red"></div>
+                            <div class="terminal-btn terminal-btn--yellow"></div>
+                            <div class="terminal-btn terminal-btn--green"></div>
+                            <div class="terminal-title">Terminal</div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">$ </span><span class="terminal-command">claude</span>
+                            </div>
+                            <div class="terminal-line terminal-output">Welcome to Claude Code!</div>
+                            <div class="terminal-line"></div>
+                            <div class="terminal-line terminal-output">? How would you like to authenticate?</div>
+                            <div class="terminal-line terminal-claude">❯ Claude.ai (Personal account)</div>
+                            <div class="terminal-line terminal-output">  Anthropic API (API key)</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="howto-footnote">
+                    <span class="nav-hint">A browser will open. Sign in, then return here.</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- =============================================
+             QUICKSTART SLIDE 5: STEP 4 - START BUILDING
+             ============================================= -->
+        <div class="slide" id="qs-step4">
+            <div class="slide-content slide-howto">
+                <h2 class="howto-title">Step 4: Describe what you want to build</h2>
+                <div class="howto-container">
+                    <div class="howto-instructions">
+                        <p class="setup-instruction">Type your project idea in as much detail as you have</p>
+                    </div>
+                    <div class="terminal terminal--compact">
+                        <div class="terminal-header">
+                            <div class="terminal-btn terminal-btn--red"></div>
+                            <div class="terminal-btn terminal-btn--yellow"></div>
+                            <div class="terminal-btn terminal-btn--green"></div>
+                            <div class="terminal-title">Terminal</div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">$ </span><span class="terminal-command">claude</span>
+                            </div>
+                            <div class="terminal-line"></div>
+                            <div class="terminal-line">
+                                <span class="terminal-claude">&gt; </span><span class="terminal-typing">Enter planning mode: Generate a product</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-typing">  requirements document and help me build</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-typing">  [describe what you want...]</span><span class="terminal-cursor">▋</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="callout-idea" data-fragment="1">
+                    <strong>Not sure what to build?</strong> Try:
+                    <ul class="idea-list">
+                        <li>"A Chrome extension that summarizes articles"</li>
+                        <li>"A script that organizes my downloads folder"</li>
+                        <li>"A website for my small business"</li>
+                    </ul>
+                </div>
+                <p class="howto-footnote">
+                    <span class="nav-hint">The more detail you provide, the better Claude can help.</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- =============================================
+             PRESENTATION SLIDE 1: RUDY QUOTE
+             ============================================= -->
+        <div class="slide" id="slide-1">
             <div class="slide-content slide-quote">
                 <p class="quote-text" data-fragment="2">It was like a coming to Jesus moment.</p>
                 <p class="quote-attribution" data-fragment="1">Michael Rudy</p>
@@ -1404,6 +1948,9 @@
         var currentSlide = 0;
         var isBlackout = false;
 
+        // ── Quickstart slide count (for ?presentation param) ──
+        var QUICKSTART_SLIDES = 5;
+
         // ── Fragments ──────────────────────────────────
         function getFragmentSteps(slideEl) {
             // Get unique fragment numbers in order
@@ -1608,6 +2155,13 @@
                 document.body.classList.add('debug-mode');
             }
 
+            // ?presentation - Jump past quickstart to presentation slides
+            if (params.get('presentation') !== null) {
+                goToSlide(QUICKSTART_SLIDES);
+                showAllFragments(slides[QUICKSTART_SLIDES]);
+                return; // Don't process ?slide if ?presentation is set
+            }
+
             // ?slide=N - Jump to slide N (1-indexed)
             var slideParam = params.get('slide');
             if (slideParam) {
@@ -1616,6 +2170,17 @@
                     goToSlide(targetSlide);
                     showAllFragments(slides[targetSlide]);
                 }
+            }
+        }
+
+        // ── Entry Card Click Handler ─────────────────
+        function setupEntryCards() {
+            var cards = document.querySelectorAll('.entry-card[data-action="next"]');
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].addEventListener('click', function(e) {
+                    e.preventDefault();
+                    next();
+                });
             }
         }
 
@@ -1635,8 +2200,37 @@
         updateProgress();
         updateSlideNumberColor();
         handleUrlParams();
+        setupEntryCards();
 
     })();
+
+    // ── Copy to Clipboard (global for onclick) ────────
+    function copyCmd(elementId, buttonEl) {
+        var text = document.getElementById(elementId).textContent;
+        navigator.clipboard.writeText(text).then(function() {
+            buttonEl.textContent = 'Copied!';
+            buttonEl.classList.add('copied');
+            setTimeout(function() {
+                buttonEl.textContent = 'Copy';
+                buttonEl.classList.remove('copied');
+            }, 2000);
+        }).catch(function(err) {
+            console.error('Copy failed:', err);
+            // Fallback for older browsers
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            buttonEl.textContent = 'Copied!';
+            buttonEl.classList.add('copied');
+            setTimeout(function() {
+                buttonEl.textContent = 'Copy';
+                buttonEl.classList.remove('copied');
+            }, 2000);
+        });
+    }
     </script>
 </body>
 </html>
